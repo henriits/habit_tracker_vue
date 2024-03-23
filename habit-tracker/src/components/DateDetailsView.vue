@@ -14,7 +14,6 @@ export default {
         };
     },
     created() {
-        // Retrieve the selected date from the route parameters
         this.selectedDate = this.$route.params.date;
     }
 };

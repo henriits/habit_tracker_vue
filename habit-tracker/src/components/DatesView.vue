@@ -1,11 +1,10 @@
 <template>
     <div class="scroll-container">
         <div class="date-div-container">
-            <router-link v-for="(date, index) in dates" :key="index" :to="`/date/${date}`" class="date-div"
+            <div v-for="(date, index) in dates" :key="index" @click="handleDateClick(date)" class="date-div"
                 :class="{ 'glow': isCurrentDate(date) }">
                 <span>{{ date }}</span>
-
-            </router-link>
+            </div>
         </div>
     </div>
 </template>
@@ -42,10 +41,15 @@ export default {
                 date.getMonth() === this.currentDate.getMonth() &&
                 date.getFullYear() === this.currentDate.getFullYear()
             );
+        },
+        handleDateClick(date) {
+            this.$router.push({ name: 'dateDetails', params: { date } });
         }
     }
 };
 </script>
+
+
 
 <style>
 .date-div-container {
@@ -67,7 +71,7 @@ export default {
 }
 
 .date-div:hover {
-    background-color: #f0f0f0;
+    background-color: #f0f0f042;
 
 }
 

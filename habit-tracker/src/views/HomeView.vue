@@ -10,5 +10,6 @@ const name = ref("Home View")
 
     <h1>{{ name }} </h1>
     <DateSelector></DateSelector>
+    <div>Create habits here!</div>
 
 </template>
