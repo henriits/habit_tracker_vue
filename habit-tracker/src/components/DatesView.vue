@@ -1,9 +1,11 @@
 <template>
     <div class="scroll-container">
         <div class="date-div-container">
-            <div v-for="(date, index) in dates" :key="index" :class="{ 'date-div': true, 'glow': isCurrentDate(date) }">
-                {{ date }}
-            </div>
+            <router-link v-for="(date, index) in dates" :key="index" :to="`/date/${date}`" class="date-div"
+                :class="{ 'glow': isCurrentDate(date) }">
+                <span>{{ date }}</span>
+
+            </router-link>
         </div>
     </div>
 </template>
@@ -49,7 +51,6 @@ export default {
 .date-div-container {
     display: inline-block;
     width: 100%;
-
 }
 
 .date-div {
@@ -61,24 +62,36 @@ export default {
     border: 1px solid black;
     padding: 10px;
     margin: 5px;
+    cursor: pointer;
+
 }
 
+.date-div:hover {
+    background-color: #f0f0f0;
+
+}
 
 .glow {
     animation: glow-animation 1s ease-in-out infinite alternate;
-
 }
 
 @keyframes glow-animation {
     0% {
         box-shadow: 0 0 5px yellow;
-
     }
 
     100% {
         box-shadow: 0 0 20px yellow;
-
-
     }
+}
+
+.date-div span {
+    display: inline-block;
+}
+
+.date-div img {
+    vertical-align: m iddle;
+    margin-left: 5px;
+
 }
 </style>
