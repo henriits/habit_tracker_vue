@@ -1,3 +1,14 @@
+<script setup>
+import { ref } from 'vue';
+import DateSelector from "../components/DatesView.vue"
+
+const name = ref("Home View")
+
+</script>
+
 <template>
-    <h1>Home view</h1>
+
+    <h1>{{ name }} </h1>
+    <DateSelector></DateSelector>
+
 </template>
