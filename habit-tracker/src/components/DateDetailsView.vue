@@ -1,8 +1,11 @@
 <template>
     <div>
         <h1>Date Details</h1>
-        <p>Selected Date: {{ formattedDate }}</p>
-        <!-- Add more details here as needed -->
+        <p>{{ formattedDate }}</p>
+        <ul v-if="habits.length > 0">
+            <li v-for="habit in habits" :key="habit">{{ habit }}</li>
+        </ul>
+        <p v-else>No habits found for this date.</p>
     </div>
 </template>
 
@@ -10,7 +13,8 @@
 export default {
     data() {
         return {
-            selectedDate: null
+            selectedDate: null,
+            habits: []
         };
     },
     created() {
@@ -32,6 +36,15 @@ export default {
     methods: {
         updateSelectedDate() {
             this.selectedDate = this.$route.params.date;
+            this.fetchHabitsForDate();
+        },
+        fetchHabitsForDate() {
+            const dateHabitMapping = JSON.parse(localStorage.getItem('DateHabitMapping'));
+            if (dateHabitMapping && dateHabitMapping[this.formattedDate]) {
+                this.habits = dateHabitMapping[this.formattedDate];
+            } else {
+                this.habits = [];
+            }
         }
     }
 };
