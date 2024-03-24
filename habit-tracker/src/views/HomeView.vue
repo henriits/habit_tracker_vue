@@ -1,15 +1,10 @@
-<script setup>
-import { ref } from 'vue';
-import DateSelector from "../components/DatesView.vue"
+<template>
+  <div>
+    <DateSelector></DateSelector>
+  </div>
+</template>
 
-const name = ref("Home View")
+<script setup>
+import DateSelector from "../components/DatesView.vue";
 
 </script>
-
-<template>
-
-    <h1>{{ name }} </h1>
-    <DateSelector></DateSelector>
-    <div>Create habits here!</div>
-
-</template>
