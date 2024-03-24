@@ -61,6 +61,20 @@ function saveHabitToSelectedDate(date, habit) {
 function attachHabitToSelectedDate() {
     if (!selectedDate.value || !selectedHabit.value) return;
 
+    // Check if the habit already exists for the selected date
+    const dateHabitMapping = JSON.parse(localStorage.getItem('DateHabitMapping')) || {};
+    if (Array.isArray(dateHabitMapping[selectedDate.value])) {
+        const existingHabits = dateHabitMapping[selectedDate.value].map(habit => habit.name);
+        if (existingHabits.includes(selectedHabit.value)) {
+            // If the habit already exists, show notification and return
+            showNotification.value = true;
+            setTimeout(() => {
+                showNotification.value = false;
+            }, 3000); // Hide notification after 3 seconds
+            return;
+        }
+    }
+
     // Assuming you have a function to save the date-habit mapping to localStorage
     saveHabitToSelectedDate(selectedDate.value, selectedHabit.value);
 }
