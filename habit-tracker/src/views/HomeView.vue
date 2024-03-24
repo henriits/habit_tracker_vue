@@ -2,12 +2,14 @@
   <div>
     <DateSelector></DateSelector>
     <div>
-      <h3>Habits:</h3>
-      <ul>
-        <li v-for="(habit, index) in habits" :key="index">
+      <h3>Select a Habit:</h3>
+      <select v-model="selectedHabit" aria-label="selectedHabit">
+        <option disabled value="">Please select a habit</option>
+        <option v-for="(habit, index) in habits" :key="index" :value="habit.name">
           {{ habit.name }}
-        </li>
-      </ul>
+        </option>
+      </select>
+      <p>You selected: {{ selectedHabit }}</p>
     </div>
   </div>
 </template>
@@ -17,6 +19,7 @@ import { onMounted, ref } from 'vue';
 import DateSelector from "../components/DatesView.vue";
 
 const habits = ref([]);
+const selectedHabit = ref('');
 
 onMounted(() => {
   const savedHabits = localStorage.getItem('CreatedHabits');
