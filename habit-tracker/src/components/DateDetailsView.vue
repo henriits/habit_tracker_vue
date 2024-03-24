@@ -8,6 +8,7 @@
                     <input type="checkbox" v-model="habit.completed" @change="updateLocalStorage">
                     {{ habit.name }}
                 </label>
+                <button @click="removeHabit(index)" type="button">Remove</button>
             </li>
         </ul>
         <p v-else>No habits found for this date.</p>
@@ -63,6 +64,10 @@ export default {
             const dateHabitMapping = JSON.parse(localStorage.getItem('DateHabitMapping')) || {};
             dateHabitMapping[this.formattedDate] = this.habits.map(habit => ({ name: habit.name, completed: habit.completed }));
             localStorage.setItem('DateHabitMapping', JSON.stringify(dateHabitMapping));
+        },
+        removeHabit(index) {
+            this.habits.splice(index, 1); // Remove habit from the habits array
+            this.updateLocalStorage(); // Update Local Storage after removing the habit
         }
     }
 };
