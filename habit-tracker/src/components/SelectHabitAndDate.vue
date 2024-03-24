@@ -98,10 +98,11 @@ function attachHabitToSelectedDate() {
 
 .notification {
     position: fixed;
-    bottom: 20px;
+    bottom: 220px;
     left: 50%;
     transform: translateX(-50%);
     background-color: #d71111;
+    color: #fff;
     padding: 10px 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
