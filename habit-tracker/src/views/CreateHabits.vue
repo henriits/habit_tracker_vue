@@ -17,7 +17,7 @@ import AddHabitForm from "../components/AddHabitForm.vue";
 const habits = ref([]);
 
 const loadHabitsFromLocalStorage = () => {
-    const savedHabits = localStorage.getItem('habits');
+    const savedHabits = localStorage.getItem('CreatedHabits');
     if (savedHabits) {
         habits.value = JSON.parse(savedHabits);
     }
@@ -29,7 +29,7 @@ onMounted(() => {
 
 
 const saveHabitsToLocalStorage = () => {
-    localStorage.setItem('habits', JSON.stringify(habits.value));
+    localStorage.setItem('CreatedHabits', JSON.stringify(habits.value));
 };
 const addNewHabit = (habitName) => {
     habits.value.push({ name: habitName }); // Add the new habit without checkboxes
