@@ -6,7 +6,7 @@
             <input type="text" id="habitName" v-model="habitName" required>
             <label for="habitEmoji">Select Emoji:</label>
             <select v-model="selectedEmoji" id="habitEmoji">
-                <option v-for="emoji in emojis" :value="emoji.value">{{ emoji.label }}</option>
+                <option v-for="emoji in emojis" :key="emoji.value" :value="emoji.value">{{ emoji.label }}</option>
             </select>
             <button type="submit">Add Habit</button>
         </form>
