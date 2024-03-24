@@ -2,12 +2,12 @@
     <!-- Use the AddHabitForm component -->
     <AddHabitForm @add="addNewHabit"></AddHabitForm>
     <div>Create habits here!</div>
-    <ul>
+    <ol>
         <li v-for="(habit, index) in habits" :key="index">
             <span>{{ habit.name }}</span>
             <button type="button" @click="removeHabit(index)">Remove</button>
         </li>
-    </ul>
+    </ol>
 </template>
 
 <script setup>

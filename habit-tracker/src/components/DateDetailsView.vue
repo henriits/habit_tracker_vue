@@ -2,7 +2,7 @@
     <div>
         <h1>Date Details</h1>
         <p>{{ formattedDate }}</p>
-        <ul v-if="habits.length > 0">
+        <ol v-if="habits.length > 0">
             <li v-for="(habit, index) in habits" :key="index">
                 <label>
                     <input type="checkbox" v-model="habit.completed" @change="updateLocalStorage">
@@ -10,7 +10,7 @@
                 </label>
                 <button @click="removeHabit(index)" type="button">Remove</button>
             </li>
-        </ul>
+        </ol>
         <p v-else>No habits found for this date.</p>
         <p>{{ completedHabitsCount }} out of {{ habits.length }} habits completed.</p>
     </div>
