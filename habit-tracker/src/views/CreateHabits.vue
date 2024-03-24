@@ -27,17 +27,17 @@ onMounted(() => {
     loadHabitsFromLocalStorage();
 });
 
-
 const saveHabitsToLocalStorage = () => {
     localStorage.setItem('CreatedHabits', JSON.stringify(habits.value));
 };
+
 const addNewHabit = (habitName) => {
-    habits.value.push({ name: habitName }); // Add the new habit without checkboxes
+    habits.value.push({ name: habitName });
     saveHabitsToLocalStorage();
 };
 
 const removeHabit = (index) => {
-    habits.value.splice(index, 1); // Remove the habit at the specified index
+    habits.value.splice(index, 1);
     saveHabitsToLocalStorage();
 };
 </script>
