@@ -14,7 +14,15 @@ export default {
         };
     },
     created() {
-        this.selectedDate = this.$route.params.date;
+        this.updateSelectedDate();
+    },
+    watch: {
+        '$route.params.date': 'updateSelectedDate'
+    },
+    methods: {
+        updateSelectedDate() {
+            this.selectedDate = this.$route.params.date;
+        }
     }
 };
 </script>
