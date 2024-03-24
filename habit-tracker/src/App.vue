@@ -1,5 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router';
+import DateSelector from "./components/DatesView.vue";
+
 </script>
 
 <template>
@@ -10,7 +12,11 @@ import { RouterLink, RouterView } from 'vue-router';
                 <RouterLink to="/create_habits">Create Habits</RouterLink>
             </nav>
         </div>
+        <div>
+            <DateSelector></DateSelector>
+        </div>
     </header>
+
 
     <RouterView />
 </template>

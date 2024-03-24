@@ -1,27 +1,25 @@
 <template>
-  <div>
-    <DateSelector></DateSelector>
-    <div>
+  <div class="container">
+    <div class="main-content">
       <h3>Select a Date:</h3>
-      <input type="date" v-model="selectedDate">
+      <input type="date" v-model="selectedDate" aria-label="input">
       <h3>Select a Habit:</h3>
-      <select v-model="selectedHabit">
+      <select v-model="selectedHabit" aria-label="select">
         <option disabled value="">Please select a habit</option>
         <option v-for="(habit, index) in habits" :key="index" :value="habit.name">
           {{ habit.name }}
         </option>
       </select>
-      <button @click="attachHabitToSelectedDate">Attach Habit</button>
-    </div>
-    <div v-if="showNotification" class="notification">
-      This habit already exists for the selected date.
+      <button @click="attachHabitToSelectedDate" type="button">Attach Habit</button>
+      <div v-if="showNotification" class="notification">
+        This habit already exists for the selected date.
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from 'vue';
-import DateSelector from "../components/DatesView.vue";
 
 const habits = ref([]);
 const selectedDate = ref('');
@@ -70,6 +68,21 @@ function attachHabitToSelectedDate() {
 </script>
 
 <style>
+.container {
+  display: grid;
+}
+
+.sidebar {
+  flex: 1;
+  padding: 20px;
+}
+
+.main-content {
+  flex: 3;
+  padding: 20px;
+}
+
+
 .notification {
   position: fixed;
   bottom: 20px;

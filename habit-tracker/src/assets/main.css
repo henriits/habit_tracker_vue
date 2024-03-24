@@ -5,6 +5,7 @@
     margin: 0 auto;
     padding: 2rem;
     font-weight: normal;
+    border: solid black 1px;
 }
 
 a,
