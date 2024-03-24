@@ -1,8 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router';
 import DateSelector from "./components/DatesView.vue";
-import SelectHabitAndDate from './components/SelectHabitAndDate.vue'
-
+import SelectHabitAndDate from "./components/SelectHabitAndDate.vue"
 
 </script>
 
