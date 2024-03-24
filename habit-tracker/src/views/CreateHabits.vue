@@ -5,7 +5,7 @@
     <ul>
         <li v-for="(habit, index) in habits" :key="index">
             <span>{{ habit.name }}</span>
-            <button @click="removeHabit(index)">Remove</button>
+            <button type="button" @click="removeHabit(index)">Remove</button>
         </li>
     </ul>
 </template>
