@@ -14,7 +14,7 @@ const router = createRouter({
         {
             path: '/create_habits',
             name: 'createHabits',
-            component: () => import('../views/CreateHabits.vue')
+            component: () => import('../views/CreateView.vue')
         },
         {
             path: '/dates',

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SelectHabitAndDate />
+
   </div>
 
 </template>

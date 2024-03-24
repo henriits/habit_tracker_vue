@@ -12,7 +12,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import AddHabitForm from "../components/AddHabitForm.vue";
+import AddHabitForm from "./AddHabitForm.vue";
 
 const habits = ref([]);
 
