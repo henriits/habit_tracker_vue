@@ -40,7 +40,8 @@ function saveHabitToSelectedDate(date, habit) {
     // If habits for the selected date already exist, check if the habit already exists before adding it
     if (Array.isArray(dateHabitMapping[date])) {
         if (!dateHabitMapping[date].includes(habit)) {
-            dateHabitMapping[date].push(habit);
+            // Add the habit with completed status (initially false)
+            dateHabitMapping[date].push({ name: habit, completed: false });
         } else {
             // Show notification to inform the user that the habit already exists
             showNotification.value = true;
@@ -50,14 +51,12 @@ function saveHabitToSelectedDate(date, habit) {
         }
     } else {
         // If there are no habits associated with the selected date yet, create a new array with the new habit
-        dateHabitMapping[date] = [habit];
+        dateHabitMapping[date] = [{ name: habit, completed: false }];
     }
 
     // Save the updated date-habit mapping back to localStorage
     localStorage.setItem('DateHabitMapping', JSON.stringify(dateHabitMapping));
 }
-
-
 
 function attachHabitToSelectedDate() {
     if (!selectedDate.value || !selectedHabit.value) return;
