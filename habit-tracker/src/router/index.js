@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
-import DatesView from '../components/DatesView.vue';
 import DateDetailsView from '../components/DateDetailsView.vue';
 
 const router = createRouter({
@@ -15,11 +14,6 @@ const router = createRouter({
             path: '/create_habits',
             name: 'createHabits',
             component: () => import('../views/CreateView.vue')
-        },
-        {
-            path: '/dates',
-            name: 'dates',
-            component: DatesView
         },
         {
             path: '/date/:date',

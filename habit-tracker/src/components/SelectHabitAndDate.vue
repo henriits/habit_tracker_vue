@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watchEffect } from 'vue';
 
 const habits = ref([]);
 const selectedDate = ref('');
@@ -27,10 +27,13 @@ const selectedHabit = ref('');
 const showNotification = ref(false);
 
 onMounted(() => {
-    const savedHabits = localStorage.getItem('CreatedHabits');
-    if (savedHabits) {
-        habits.value = JSON.parse(savedHabits);
-    }
+    // Watch for changes in localStorage and update habits accordingly
+    watchEffect(() => {
+        const savedHabits = localStorage.getItem('CreatedHabits');
+        if (savedHabits) {
+            habits.value = JSON.parse(savedHabits);
+        }
+    });
 });
 
 function saveHabitToSelectedDate(date, habit) {
@@ -79,19 +82,7 @@ function attachHabitToSelectedDate() {
     saveHabitToSelectedDate(selectedDate.value, selectedHabit.value);
 }
 
-// Function to update habit in DateHabitMapping
-function updateHabitInMapping(oldHabit, newHabit) {
-    const dateHabitMapping = JSON.parse(localStorage.getItem('DateHabitMapping')) || {};
-    Object.keys(dateHabitMapping).forEach(date => {
-        const habits = dateHabitMapping[date];
-        habits.forEach(habit => {
-            if (habit.name === oldHabit) {
-                habit.name = newHabit;
-            }
-        });
-    });
-    localStorage.setItem('DateHabitMapping', JSON.stringify(dateHabitMapping));
-}
+
 </script>
 
 <style>
