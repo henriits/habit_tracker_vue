@@ -5,7 +5,7 @@
         <ol v-if="habits.length > 0">
             <li v-for="(habit, index) in habits" :key="index">
                 <label>
-                    <input type="checkbox" v-model="habit.completed" @change="updateLocalStorage">
+                    <input type="checkbox" v-model="habit.completed" @change="updateHabit(index)">
                     {{ habit.name }}
                 </label>
                 <button @click="removeHabit(index)" type="button">Remove</button>
@@ -60,19 +60,27 @@ export default {
                 this.habits = [];
             }
         },
-        updateLocalStorage() {
+        updateHabit(index) {
+            const habitToUpdate = this.habits[index];
             const dateHabitMapping = JSON.parse(localStorage.getItem('DateHabitMapping')) || {};
-            dateHabitMapping[this.formattedDate] = this.habits.map(habit => ({ name: habit.name, completed: habit.completed }));
-            localStorage.setItem('DateHabitMapping', JSON.stringify(dateHabitMapping));
+            const habitsForDate = dateHabitMapping[this.formattedDate];
+            if (habitsForDate) {
+                const habitIndex = habitsForDate.findIndex(h => h.name === habitToUpdate.name);
+                if (habitIndex !== -1) {
+                    habitsForDate[habitIndex].completed = habitToUpdate.completed;
+                    localStorage.setItem('DateHabitMapping', JSON.stringify(dateHabitMapping));
+                }
+            }
         },
         removeHabit(index) {
             this.habits.splice(index, 1); // Remove habit from the habits array
             this.updateLocalStorage(); // Update Local Storage after removing the habit
+        },
+        updateLocalStorage() {
+            const dateHabitMapping = JSON.parse(localStorage.getItem('DateHabitMapping')) || {};
+            dateHabitMapping[this.formattedDate] = this.habits.map(habit => ({ name: habit.name, completed: habit.completed }));
+            localStorage.setItem('DateHabitMapping', JSON.stringify(dateHabitMapping));
         }
     }
 };
 </script>
-
-<style>
-/* Styles */
-</style>

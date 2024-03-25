@@ -78,6 +78,20 @@ function attachHabitToSelectedDate() {
     // Assuming you have a function to save the date-habit mapping to localStorage
     saveHabitToSelectedDate(selectedDate.value, selectedHabit.value);
 }
+
+// Function to update habit in DateHabitMapping
+function updateHabitInMapping(oldHabit, newHabit) {
+    const dateHabitMapping = JSON.parse(localStorage.getItem('DateHabitMapping')) || {};
+    Object.keys(dateHabitMapping).forEach(date => {
+        const habits = dateHabitMapping[date];
+        habits.forEach(habit => {
+            if (habit.name === oldHabit) {
+                habit.name = newHabit;
+            }
+        });
+    });
+    localStorage.setItem('DateHabitMapping', JSON.stringify(dateHabitMapping));
+}
 </script>
 
 <style>
