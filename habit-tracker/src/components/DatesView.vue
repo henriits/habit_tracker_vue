@@ -1,8 +1,8 @@
 <template>
     <div class="scroll-container">
         <div class="date-div-container">
-            <div v-for="(date, index) in dates" :key="index" @click="handleDateClick(date)" class="date-div"
-                :class="{ 'glow': isCurrentDate(date) }">
+            <div v-for="(date, index) in dates" :key="index" @click="handleDateClick(date)" @keydown="index"
+                class="date-div" :class="{ 'glow': isCurrentDate(date) }">
                 <span>{{ date }}</span>
             </div>
         </div>
@@ -94,7 +94,7 @@ export default {
 }
 
 .date-div img {
-    vertical-align: m iddle;
+    vertical-align: middle;
     margin-left: 5px;
 
 }
