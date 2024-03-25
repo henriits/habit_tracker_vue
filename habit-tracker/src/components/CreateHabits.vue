@@ -4,7 +4,11 @@
     <div>Create habits here!</div>
     <ol>
         <li v-for="(habit, index) in habits" :key="index">
-            <span>{{ habit.name }}</span>
+            <span v-if="!habit.editing">{{ habit.name }}</span>
+            <input v-else v-model="habit.name" @blur="saveEditedHabit(index)" />
+            <button type="button" @click="toggleEdit(index)">
+                {{ habit.editing ? 'Save' : 'Edit' }}
+            </button>
             <button type="button" @click="removeHabit(index)">Remove</button>
         </li>
     </ol>
@@ -32,12 +36,21 @@ const saveHabitsToLocalStorage = () => {
 };
 
 const addNewHabit = (habitName) => {
-    habits.value.push({ name: habitName });
+    habits.value.push({ name: habitName, editing: false });
     saveHabitsToLocalStorage();
 };
 
 const removeHabit = (index) => {
     habits.value.splice(index, 1);
+    saveHabitsToLocalStorage();
+};
+
+const toggleEdit = (index) => {
+    habits.value[index].editing = !habits.value[index].editing;
+};
+
+const saveEditedHabit = (index) => {
+    habits.value[index].editing = false;
     saveHabitsToLocalStorage();
 };
 </script>
