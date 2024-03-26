@@ -51,9 +51,11 @@ export default {
 
 <style>
 .scroll-container {
-    width: 20%;
-    white-space: nowrap;
-    overflow-x: auto;
+    direction: ltr;
+    display: block;
+    overflow: auto;
+    height: 20%;
+    width: 56%;
 }
 
 .date-div-container {
@@ -97,5 +99,15 @@ export default {
 .date-div img {
     vertical-align: middle;
     margin-left: 5px;
+}
+
+
+@media screen and (width <=768px) {
+    .scroll-container {
+        /* Adjust width for smaller screens */
+        width: 100%;
+
+        /* Optionally, you can also adjust other properties like padding or margin */
+    }
 }
 </style>
