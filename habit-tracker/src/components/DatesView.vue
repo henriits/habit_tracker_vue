@@ -1,5 +1,5 @@
 <template>
-    <div class="scroll-container">
+    <div ref="scrollContainer" class="scroll-container" @scroll="handleScroll">
         <div class="date-div-container">
             <div v-for="(date, index) in dates" :key="index" @click="handleDateClick(date)" @keydown="index"
                 class="date-div" :class="{ 'glow': isCurrentDate(date) }">
@@ -22,6 +22,10 @@ export default {
     },
     mounted() {
         this.generateDates();
+        // Automatically scroll back to the middle after a delay
+        setTimeout(() => {
+            this.scrollToMiddle();
+        }, 3000); // Adjust the delay as needed
     },
     methods: {
         generateDates() {
@@ -44,12 +48,46 @@ export default {
         },
         handleDateClick(date) {
             this.$router.push({ name: 'dateDetails', params: { date } });
+        },
+        scrollToMiddle() {
+            const container = this.$refs.scrollContainer;
+            if (container) {
+                const middlePosition = container.scrollWidth / 2 - container.clientWidth / 2;
+                container.scrollLeft = middlePosition;
+            }
+        },
+        handleScroll() {
+            clearTimeout(this.scrollTimeout);
+            this.scrollTimeout = setTimeout(() => {
+                this.scrollToMiddle();
+            }, 5000); // Adjust the delay as needed
         }
     }
 };
 </script>
 
 <style>
+/* For WebKit (Safari, Google Chrome etc.) */
+::-webkit-scrollbar {
+    width: 12px;
+
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f140;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0ea918;
+}
+
+
 .scroll-container {
     direction: ltr;
     display: block;
