@@ -1,7 +1,7 @@
 <template>
     <!-- Use the AddHabitForm component -->
     <AddHabitForm @add="addNewHabit"></AddHabitForm>
-    <div>Create habits here!</div>
+    <div>Custom Created Habits!</div>
     <ol>
         <li v-for="(habit, index) in habits" :key="index">
             <span v-if="!habit.editing">{{ habit.name }}</span>

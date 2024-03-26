@@ -51,7 +51,7 @@ export default {
 
 <style>
 .scroll-container {
-    width: 50%;
+    width: 20%;
     white-space: nowrap;
     overflow-x: auto;
 }
@@ -62,7 +62,6 @@ export default {
 }
 
 .date-div {
-    width: 150px;
     box-sizing: border-box;
     display: inline-block;
     vertical-align: top;
