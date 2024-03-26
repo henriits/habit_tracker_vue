@@ -49,16 +49,20 @@ export default {
 };
 </script>
 
-
-
 <style>
+.scroll-container {
+    width: 50%;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
 .date-div-container {
     display: inline-block;
-    width: 100%;
+    width: max-content;
 }
 
 .date-div {
-    width: calc(33.33% - 10px);
+    width: 150px;
     box-sizing: border-box;
     display: inline-block;
     vertical-align: top;
@@ -67,12 +71,10 @@ export default {
     padding: 10px;
     margin: 5px;
     cursor: pointer;
-
 }
 
 .date-div:hover {
     background-color: #f0f0f042;
-
 }
 
 .glow {
@@ -96,6 +98,5 @@ export default {
 .date-div img {
     vertical-align: middle;
     margin-left: 5px;
-
 }
 </style>
