@@ -83,11 +83,48 @@ export default {
     cursor: pointer;
 }
 
+.date-div:hover {
+    background-color: #f0f0f042;
+}
+
 .scroll-container {
     direction: ltr;
     display: block;
     overflow: auto;
     height: 20%;
 
+}
+
+.glow {
+    animation: glow-animation 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow-animation {
+    0% {
+        box-shadow: 0 0 5px aquamarine;
+    }
+
+    100% {
+        box-shadow: 0 0 20px aquamarine;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f140;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: aqua;
 }
 </style>

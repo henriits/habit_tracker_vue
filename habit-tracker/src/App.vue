@@ -4,16 +4,19 @@ import DatesView from './components/DatesView.vue';
 
 
 
+
 </script>
 
 <template>
-
     <div>
-        <nav>
+        <nav class="nav-bar">
             <RouterLink to="/">Home</RouterLink>
             <RouterLink to="/create_habits">Create Habits</RouterLink>
+            <h1 class="title">Habitify</h1>
         </nav>
-        <DatesView></DatesView>
+        <div class="container">
+            <DatesView></DatesView>
+        </div>
     </div>
     <br>
 
