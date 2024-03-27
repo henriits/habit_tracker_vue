@@ -1,14 +1,14 @@
 <template>
     <div>
-        <form @submit.prevent="addHabit">
-            <input class="custom-select" type="text" id="habitName" v-model="habitName" required
-                placeholder="Enter Habit name">
+        <form @submit.prevent="addHabit" class="habit-form">
+            <input type="text" id="habitName" v-model="habitName" required placeholder="Enter Habit name"
+                class="habit-input">
 
-            <select v-model="selectedEmoji" id="habitEmoji" class="custom-select">
-                <option disabled value="">Please select a Emoji</option>
+            <select v-model="selectedEmoji" id="habitEmoji" class="habit-select">
+                <option disabled value="">Please select an Emoji</option>
                 <option v-for="emoji in emojis" :key="emoji.value" :value="emoji.value">{{ emoji.label }}</option>
             </select>
-            <button type="submit" class="custom-select">Create New Habit</button>
+            <button type="submit" class="habit-button">Create New Habit</button>
         </form>
     </div>
 </template>
@@ -50,3 +50,35 @@ export default {
     }
 };
 </script>
+
+<style scoped>
+.habit-form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.habit-input,
+.habit-select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.habit-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: aquamarine;
+    color: #161010;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.habit-button:hover {
+    background-color: aqua;
+}
+</style>

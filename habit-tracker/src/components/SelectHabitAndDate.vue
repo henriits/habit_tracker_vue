@@ -1,20 +1,18 @@
 <template>
-    <div class="container">
+    <div class="select-date-and-habit">
         <div class="main-content">
-            <h3>Select a Date:</h3>
-            <input type="date" v-model="selectedDate" aria-label="input" class="custom-date">
+            <h3 class="content-heading">Select a Date:</h3>
+            <input type="date" v-model="selectedDate" aria-label="input" class="custom-input">
 
-            <h3>Select a Habit:</h3>
+            <h3 class="content-heading">Select a Habit:</h3>
             <select v-model="selectedHabit" aria-label="select" class="custom-select">
                 <option disabled value="">Please select a habit</option>
-                <option v-for="(habit, index) in habits" :key="index" :value="habit.name">
-                    {{ habit.name }}
-                </option>
+                <option v-for="(habit, index) in habits" :key="index" :value="habit.name">{{ habit.name }}</option>
             </select>
 
             <br>
 
-            <button @click="attachHabitToSelectedDate" type="button" class="custom-select">
+            <button @click="attachHabitToSelectedDate" type="button" class="custom-button">
                 Attach Habit
             </button>
 
@@ -92,4 +90,39 @@ function attachHabitToSelectedDate() {
 
 </script>
 
-<style></style>
+<style>
+.select-date-and-habit {
+    max-width: 400px;
+    margin: 0 auto;
+
+}
+
+.content-heading {
+    margin-bottom: 5px;
+}
+
+.custom-input,
+.custom-select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.custom-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: aquamarine;
+    color: #0c0a0a;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.custom-button:hover {
+    background-color: aqua;
+}
+</style>
