@@ -130,6 +130,10 @@ export default {
     }
 }
 
+html {
+    overflow: hidden;
+}
+
 .date-div span {
     display: inline-block;
 }
