@@ -67,35 +67,6 @@ export default {
 </script>
 
 <style>
-/* For WebKit (Safari, Google Chrome etc.) */
-::-webkit-scrollbar {
-    width: 12px;
-
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f1f140;
-    border-radius: 6px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 6px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #0ea918;
-}
-
-
-.scroll-container {
-    direction: ltr;
-    display: block;
-    overflow: auto;
-    height: 20%;
-    width: 56%;
-}
-
 .date-div-container {
     display: inline-block;
     width: max-content;
@@ -112,44 +83,11 @@ export default {
     cursor: pointer;
 }
 
-.date-div:hover {
-    background-color: #f0f0f042;
-}
+.scroll-container {
+    direction: ltr;
+    display: block;
+    overflow: auto;
+    height: 20%;
 
-.glow {
-    animation: glow-animation 1s ease-in-out infinite alternate;
-}
-
-@keyframes glow-animation {
-    0% {
-        box-shadow: 0 0 5px yellow;
-    }
-
-    100% {
-        box-shadow: 0 0 20px yellow;
-    }
-}
-
-html {
-    overflow: hidden;
-}
-
-.date-div span {
-    display: inline-block;
-}
-
-.date-div img {
-    vertical-align: middle;
-    margin-left: 5px;
-}
-
-
-@media screen and (width <=768px) {
-    .scroll-container {
-        /* Adjust width for smaller screens */
-        width: 100%;
-
-        /* Optionally, you can also adjust other properties like padding or margin */
-    }
 }
 </style>

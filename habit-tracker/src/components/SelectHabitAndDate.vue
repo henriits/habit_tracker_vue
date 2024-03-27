@@ -2,15 +2,22 @@
     <div class="container">
         <div class="main-content">
             <h3>Select a Date:</h3>
-            <input type="date" v-model="selectedDate" aria-label="input">
+            <input type="date" v-model="selectedDate" aria-label="input" class="custom-date">
+
             <h3>Select a Habit:</h3>
-            <select v-model="selectedHabit" aria-label="select">
+            <select v-model="selectedHabit" aria-label="select" class="custom-select">
                 <option disabled value="">Please select a habit</option>
                 <option v-for="(habit, index) in habits" :key="index" :value="habit.name">
                     {{ habit.name }}
                 </option>
             </select>
-            <button @click="attachHabitToSelectedDate" type="button">Attach Habit</button>
+
+            <br>
+
+            <button @click="attachHabitToSelectedDate" type="button" class="custom-select">
+                Attach Habit
+            </button>
+
             <div v-if="showNotification" class="notification">
                 This habit already exists for the selected date.
             </div>
@@ -85,32 +92,4 @@ function attachHabitToSelectedDate() {
 
 </script>
 
-<style>
-.container {
-    display: grid;
-}
-
-.sidebar {
-    flex: 1;
-    padding: 20px;
-}
-
-.main-content {
-    flex: 3;
-    padding: 20px;
-}
-
-
-.notification {
-    position: fixed;
-    bottom: 220px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #d71111;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
-    z-index: 9999;
-}
-</style>
+<style></style>

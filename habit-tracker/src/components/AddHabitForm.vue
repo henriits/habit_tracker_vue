@@ -1,14 +1,14 @@
 <template>
     <div>
-        <h2>Add New Habit</h2>
         <form @submit.prevent="addHabit">
-            <label for="habitName">Habit Name:</label>
-            <input type="text" id="habitName" v-model="habitName" required>
-            <label for="habitEmoji">Select Emoji:</label>
-            <select v-model="selectedEmoji" id="habitEmoji">
+            <input class="custom-select" type="text" id="habitName" v-model="habitName" required
+                placeholder="Enter Habit name">
+
+            <select v-model="selectedEmoji" id="habitEmoji" class="custom-select">
+                <option disabled value="">Please select a Emoji</option>
                 <option v-for="emoji in emojis" :key="emoji.value" :value="emoji.value">{{ emoji.label }}</option>
             </select>
-            <button type="submit">Add Habit</button>
+            <button type="submit" class="custom-select">Create New Habit</button>
         </form>
     </div>
 </template>
