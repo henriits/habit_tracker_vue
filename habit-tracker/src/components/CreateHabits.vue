@@ -1,5 +1,4 @@
 <template>
-    <!-- Use the AddHabitForm component -->
     <div class="custom-created-habits">
         <AddHabitForm @add="addNewHabit"></AddHabitForm>
         <div class="habit-list-title">Custom Created Habits!</div>
@@ -7,10 +6,11 @@
             <li v-for="(habit, index) in habits" :key="index" class="habit-item">
                 <span v-if="!habit.editing" class="habit-name">{{ habit.name }}</span>
                 <input v-else v-model="habit.name" @blur="saveEditedHabit(index)" class="habit-edit-input" />
-                <button type="button" @click="toggleEdit(index)" class="habit-button">
-                    {{ habit.editing ? 'Save' : 'Edit' }}
-                </button>
-                <button type="button" @click="removeHabit(index)" class="habit-button">Remove</button>
+                <div class="button-container">
+                    <button type="button" @click="toggleEdit(index)" class="habit-button">{{ habit.editing ? 'Save' :
+            'Edit' }}</button>
+                    <button type="button" @click="removeHabit(index)" class="remove-button">Remove</button>
+                </div>
             </li>
         </ol>
         <div v-else class="no-habits-message">No custom habits created yet.</div>
@@ -58,13 +58,11 @@ const saveEditedHabit = (index) => {
 };
 </script>
 
-
 <style scoped>
 .custom-created-habits {
-    max-width: 400px;
+    max-width: 500px;
     margin: 0 auto;
 }
-
 
 .habit-list-title {
     font-size: 24px;
@@ -78,6 +76,11 @@ const saveEditedHabit = (index) => {
 }
 
 .habit-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    /* Add this line */
     margin-bottom: 10px;
 }
 
@@ -90,6 +93,12 @@ const saveEditedHabit = (index) => {
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+.button-container {
+    display: flex;
+
+    /* Add this line */
 }
 
 .habit-button {
@@ -105,5 +114,21 @@ const saveEditedHabit = (index) => {
 
 .habit-button:hover {
     background-color: aqua;
+}
+
+
+.remove-button {
+    font-size: 16px;
+    padding: 8px 12px;
+    margin-left: 5px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.remove-button:hover {
+    background-color: #c82333;
 }
 </style>
