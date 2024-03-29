@@ -14,11 +14,23 @@
         </ol>
         <p v-else class="no-habits">No habits found for this date.</p>
         <p class="habit-count">{{ completedHabitsCount }} out of {{ habits.length }} habits completed.</p>
+        <p v-if="allHabitsCompleted" class="completion-message">Congratulations! You've completed all habits for this
+            date.</p>
+
     </div>
 </template>
 
+<script setup>
+
+</script>
+
+
+
 <script>
+
+
 export default {
+
     data() {
         return {
             selectedDate: null,
@@ -42,6 +54,9 @@ export default {
         },
         completedHabitsCount() {
             return this.habits.filter(habit => habit.completed).length;
+        },
+        allHabitsCompleted() {
+            return this.habits.length > 0 && this.completedHabitsCount === this.habits.length;
         }
     },
     methods: {
