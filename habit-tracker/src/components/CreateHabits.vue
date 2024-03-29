@@ -3,7 +3,7 @@
     <div class="custom-created-habits">
         <AddHabitForm @add="addNewHabit"></AddHabitForm>
         <div class="habit-list-title">Custom Created Habits!</div>
-        <ol class="habit-list">
+        <ol v-if="habits.length > 0" class="habit-list">
             <li v-for="(habit, index) in habits" :key="index" class="habit-item">
                 <span v-if="!habit.editing" class="habit-name">{{ habit.name }}</span>
                 <input v-else v-model="habit.name" @blur="saveEditedHabit(index)" class="habit-edit-input" />
@@ -13,6 +13,7 @@
                 <button type="button" @click="removeHabit(index)" class="habit-button">Remove</button>
             </li>
         </ol>
+        <div v-else class="no-habits-message">No custom habits created yet.</div>
     </div>
 </template>
 
