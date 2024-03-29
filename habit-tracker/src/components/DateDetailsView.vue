@@ -1,18 +1,19 @@
 <template>
-    <div>
-        <h1>Date Details</h1>
-        <p>{{ formattedDate }}</p>
-        <ol v-if="habits.length > 0">
-            <li v-for="(habit, index) in habits" :key="index">
-                <label>
-                    <input type="checkbox" v-model="habit.completed" @change="updateHabit(index)">
-                    {{ habit.name }}
+    <div class="date-details">
+        <h1 class="section-heading">Date Details</h1>
+        <p class="formatted-date">{{ formattedDate }}</p>
+        <ol v-if="habits.length > 0" class="habit-list">
+            <li v-for="(habit, index) in habits" :key="index" class="habit-item">
+                <label class="habit-label">
+                    <input type="checkbox" v-model="habit.completed" @change="updateHabit(index)"
+                        class="habit-checkbox">
+                    <span>{{ habit.name }}</span>
                 </label>
-                <button @click="removeHabit(index)" type="button">Remove</button>
+                <button @click="removeHabit(index)" type="button" class="remove-button">Remove</button>
             </li>
         </ol>
-        <p v-else>No habits found for this date.</p>
-        <p>{{ completedHabitsCount }} out of {{ habits.length }} habits completed.</p>
+        <p v-else class="no-habits">No habits found for this date.</p>
+        <p class="habit-count">{{ completedHabitsCount }} out of {{ habits.length }} habits completed.</p>
     </div>
 </template>
 
@@ -84,3 +85,64 @@ export default {
     }
 };
 </script>
+
+<style scoped>
+.date-details {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.section-heading {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.formatted-date {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.habit-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.habit-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.habit-label {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.habit-checkbox {
+    margin-right: 10px;
+}
+
+.remove-button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.remove-button:hover {
+    background-color: #c82333;
+}
+
+.no-habits {
+    font-size: 16px;
+    color: #6c757d;
+}
+
+.habit-count {
+    font-size: 18px;
+}
+</style>
