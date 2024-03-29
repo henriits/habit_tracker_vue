@@ -1,11 +1,13 @@
 <template>
     <div class="date-details">
-        <!-- Other content -->
+        <h1 class="section-heading">Date Details</h1>
+        <p class="formatted-date">{{ formattedDate }}</p>
         <ol v-if="habits.length > 0" class="habit-list">
-            <li v-for="(habit, index) in habits" :key="index" class="habit-item">
-                <label :class="{ 'disabled': isFutureDate }">
+            <li v-for="(habit, index) in habits" :key="index" class="habit-item" :class="{ 'disabled': isFutureDate }">
+                <label class="habit-label">
                     <input type="checkbox" v-model="habit.completed" :disabled="isFutureDate"
                         @change="updateHabit(index)" class="habit-checkbox">
+
                     <span>{{ habit.name }}</span>
                 </label>
                 <button @click="removeHabit(index)" type="button" class="remove-button">Remove</button>
@@ -13,22 +15,20 @@
         </ol>
         <p v-else class="no-habits">No habits found for this date.</p>
         <p class="habit-count">{{ completedHabitsCount }} out of {{ habits.length }} habits completed.</p>
-        <vue-confetti v-if="allHabitsCompleted" />
+        <p v-if="allHabitsCompleted" class="completion-message">Congratulations! You've completed all habits for this
+            date.</p>
         <p v-if="isFutureDate" class="future-date-message">You cannot mark habits as complete for future dates.</p>
+
     </div>
 </template>
+
 
 <script setup>
 
 </script>
 
-
-
 <script>
-
-
 export default {
-
     data() {
         return {
             selectedDate: null,
@@ -102,12 +102,6 @@ export default {
         }
     }
 };
-
-
-
-
-
-
 </script>
 
 <style scoped>
@@ -135,6 +129,7 @@ export default {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    font-size: 22px;
 }
 
 .habit-label {
@@ -171,12 +166,11 @@ export default {
 }
 
 .disabled {
-    opacity: 0.5;
-    pointer-events: none;
+    cursor: not-allowed;
 }
 
 .future-date-message {
     color: red;
-    font-weight: bold;
+    font-size: 18px;
 }
 </style>
