@@ -67,6 +67,10 @@ export default {
     font-size: 16px;
 }
 
+.habit-select {
+    cursor: pointer;
+}
+
 .habit-button {
     display: inline-block;
     padding: 10px 20px;

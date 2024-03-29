@@ -1,10 +1,8 @@
 <template>
     <div class="select-date-and-habit">
         <div class="main-content">
-            <h3 class="content-heading">Select a Date:</h3>
+            <h3 class="content-heading">Select a Date and a Habit!</h3>
             <input type="date" v-model="selectedDate" aria-label="input" class="custom-input">
-
-            <h3 class="content-heading">Select a Habit:</h3>
             <select v-model="selectedHabit" aria-label="select" class="custom-select">
                 <option disabled value="">Please select a habit</option>
                 <option v-for="(habit, index) in habits" :key="index" :value="habit.name">{{ habit.name }}</option>
@@ -19,6 +17,10 @@
             <div v-if="showNotification" class="notification">
                 This habit already exists for the selected date.
             </div>
+
+            <div v-if="habitAddedNotification" class="green-notification">
+                Habit successfully added!
+            </div>
         </div>
     </div>
 </template>
@@ -30,6 +32,7 @@ const habits = ref([]);
 const selectedDate = ref('');
 const selectedHabit = ref('');
 const showNotification = ref(false);
+const habitAddedNotification = ref(false);
 
 onMounted(() => {
     // Watch for changes in localStorage and update habits accordingly
@@ -50,6 +53,10 @@ function saveHabitToSelectedDate(date, habit) {
         if (!dateHabitMapping[date].includes(habit)) {
             // Add the habit with completed status (initially false)
             dateHabitMapping[date].push({ name: habit, completed: false });
+            habitAddedNotification.value = true; // Set habitAddedNotification to true
+            setTimeout(() => {
+                habitAddedNotification.value = false; // Hide notification after 3 seconds
+            }, 3000);
         } else {
             // Show notification to inform the user that the habit already exists
             showNotification.value = true;
@@ -60,6 +67,10 @@ function saveHabitToSelectedDate(date, habit) {
     } else {
         // If there are no habits associated with the selected date yet, create a new array with the new habit
         dateHabitMapping[date] = [{ name: habit, completed: false }];
+        habitAddedNotification.value = true; // Set habitAddedNotification to true
+        setTimeout(() => {
+            habitAddedNotification.value = false; // Hide notification after 3 seconds
+        }, 3000);
     }
 
     // Save the updated date-habit mapping back to localStorage
@@ -86,8 +97,6 @@ function attachHabitToSelectedDate() {
     // Assuming you have a function to save the date-habit mapping to localStorage
     saveHabitToSelectedDate(selectedDate.value, selectedHabit.value);
 }
-
-
 </script>
 
 <style>
@@ -109,6 +118,7 @@ function attachHabitToSelectedDate() {
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .custom-button {
@@ -124,5 +134,9 @@ function attachHabitToSelectedDate() {
 
 .custom-button:hover {
     background-color: aqua;
+}
+
+.green-notification {
+    color: aquamarine;
 }
 </style>
