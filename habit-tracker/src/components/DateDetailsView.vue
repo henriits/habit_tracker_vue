@@ -1,12 +1,14 @@
 <template>
     <div class="date-details">
-        <h1 class="section-heading">Date Details</h1>
         <p class="formatted-date">{{ formattedDate }}</p>
         <ol v-if="habits.length > 0" class="habit-list">
             <li v-for="(habit, index) in habits" :key="index" class="habit-item" :class="{ 'disabled': isFutureDate }">
                 <label class="habit-label">
                     <input type="checkbox" v-model="habit.completed" :disabled="isFutureDate"
-                        @change="updateHabit(index)" class="habit-checkbox">
+                        @change="updateHabit(index)" :class="{
+            'habit-checkbox': !isFutureDate,
+            'disabled-habit-checkbox': isFutureDate
+        }">
 
                     <span>{{ habit.name }}</span>
                 </label>
@@ -140,7 +142,15 @@ export default {
 
 .habit-checkbox {
     margin-right: 10px;
+    cursor: pointer;
 }
+
+.disabled-habit-checkbox {
+    margin-right: 10px;
+    cursor: not-allowed;
+}
+
+
 
 .remove-button {
     background-color: #dc3545;
@@ -165,9 +175,6 @@ export default {
     font-size: 18px;
 }
 
-.disabled {
-    cursor: not-allowed;
-}
 
 .future-date-message {
     color: red;
