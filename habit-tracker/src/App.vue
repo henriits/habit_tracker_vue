@@ -1,26 +1,27 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router';
-import DateSelector from "./components/DatesView.vue";
-import SelectHabitAndDate from "./components/SelectHabitAndDate.vue"
+import DatesView from './components/DatesView.vue';
+
+
+
 
 </script>
 
 <template>
-    <header>
-        <div>
-            <nav>
-                <RouterLink to="/">Home</RouterLink>
-                <RouterLink to="/create_habits">Create Habits</RouterLink>
-            </nav>
+    <div>
+        <nav class="nav-bar">
+            <RouterLink to="/">Home</RouterLink>
+            <RouterLink to="/create_habits">Create Habits</RouterLink>
+            <h1 class="title">DailyDrive</h1>
+        </nav>
+        <div class="container">
+            <DatesView></DatesView>
         </div>
-        <div>
-            <DateSelector></DateSelector>
-        </div>
-        <div>
-            <SelectHabitAndDate />
-        </div>
-    </header>
+    </div>
+    <br>
 
 
+
+    <!-- Render the dynamic component -->
     <RouterView />
 </template>

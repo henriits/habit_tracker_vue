@@ -1,18 +1,25 @@
 <template>
-    <div class="container">
+    <div class="select-date-and-habit">
         <div class="main-content">
-            <h3>Select a Date:</h3>
-            <input type="date" v-model="selectedDate" aria-label="input">
-            <h3>Select a Habit:</h3>
-            <select v-model="selectedHabit" aria-label="select">
+            <h3 class="content-heading">Select a Date and a Habit!</h3>
+            <input type="date" v-model="selectedDate" aria-label="input" class="custom-input">
+            <select v-model="selectedHabit" aria-label="select" class="custom-select">
                 <option disabled value="">Please select a habit</option>
-                <option v-for="(habit, index) in habits" :key="index" :value="habit.name">
-                    {{ habit.name }}
-                </option>
+                <option v-for="(habit, index) in habits" :key="index" :value="habit.name">{{ habit.name }}</option>
             </select>
-            <button @click="attachHabitToSelectedDate" type="button">Attach Habit</button>
+
+            <br>
+
+            <button @click="attachHabitToSelectedDate" type="button" class="custom-button">
+                Attach Habit
+            </button>
+
             <div v-if="showNotification" class="notification">
                 This habit already exists for the selected date.
+            </div>
+
+            <div v-if="habitAddedNotification" class="green-notification">
+                Habit successfully added!
             </div>
         </div>
     </div>
@@ -25,6 +32,7 @@ const habits = ref([]);
 const selectedDate = ref('');
 const selectedHabit = ref('');
 const showNotification = ref(false);
+const habitAddedNotification = ref(false);
 
 onMounted(() => {
     // Watch for changes in localStorage and update habits accordingly
@@ -45,6 +53,10 @@ function saveHabitToSelectedDate(date, habit) {
         if (!dateHabitMapping[date].includes(habit)) {
             // Add the habit with completed status (initially false)
             dateHabitMapping[date].push({ name: habit, completed: false });
+            habitAddedNotification.value = true; // Set habitAddedNotification to true
+            setTimeout(() => {
+                habitAddedNotification.value = false; // Hide notification after 3 seconds
+            }, 3000);
         } else {
             // Show notification to inform the user that the habit already exists
             showNotification.value = true;
@@ -55,6 +67,10 @@ function saveHabitToSelectedDate(date, habit) {
     } else {
         // If there are no habits associated with the selected date yet, create a new array with the new habit
         dateHabitMapping[date] = [{ name: habit, completed: false }];
+        habitAddedNotification.value = true; // Set habitAddedNotification to true
+        setTimeout(() => {
+            habitAddedNotification.value = false; // Hide notification after 3 seconds
+        }, 3000);
     }
 
     // Save the updated date-habit mapping back to localStorage
@@ -81,36 +97,46 @@ function attachHabitToSelectedDate() {
     // Assuming you have a function to save the date-habit mapping to localStorage
     saveHabitToSelectedDate(selectedDate.value, selectedHabit.value);
 }
-
-
 </script>
 
 <style>
-.container {
-    display: grid;
+.select-date-and-habit {
+    max-width: 400px;
+    margin: 0 auto;
+
 }
 
-.sidebar {
-    flex: 1;
-    padding: 20px;
+.content-heading {
+    margin-bottom: 5px;
 }
 
-.main-content {
-    flex: 3;
-    padding: 20px;
+.custom-input,
+.custom-select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
 }
 
-
-.notification {
-    position: fixed;
-    bottom: 220px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #d71111;
-    color: #fff;
+.custom-button {
+    display: inline-block;
     padding: 10px 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
-    z-index: 9999;
+    background-color: aquamarine;
+    color: #0c0a0a;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.custom-button:hover {
+    background-color: aqua;
+}
+
+.green-notification {
+    color: aquamarine;
 }
 </style>

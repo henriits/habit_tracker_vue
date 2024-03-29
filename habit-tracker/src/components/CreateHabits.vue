@@ -1,17 +1,20 @@
 <template>
-    <!-- Use the AddHabitForm component -->
-    <AddHabitForm @add="addNewHabit"></AddHabitForm>
-    <div>Create habits here!</div>
-    <ol>
-        <li v-for="(habit, index) in habits" :key="index">
-            <span v-if="!habit.editing">{{ habit.name }}</span>
-            <input v-else v-model="habit.name" @blur="saveEditedHabit(index)" />
-            <button type="button" @click="toggleEdit(index)">
-                {{ habit.editing ? 'Save' : 'Edit' }}
-            </button>
-            <button type="button" @click="removeHabit(index)">Remove</button>
-        </li>
-    </ol>
+    <div class="custom-created-habits">
+        <AddHabitForm @add="addNewHabit"></AddHabitForm>
+        <div class="habit-list-title">Custom Created Habits!</div>
+        <ol v-if="habits.length > 0" class="habit-list">
+            <li v-for="(habit, index) in habits" :key="index" class="habit-item">
+                <span v-if="!habit.editing" class="habit-name">{{ habit.name }}</span>
+                <input v-else v-model="habit.name" @blur="saveEditedHabit(index)" class="habit-edit-input" />
+                <div class="button-container">
+                    <button type="button" @click="toggleEdit(index)" class="habit-button">{{ habit.editing ? 'Save' :
+            'Edit' }}</button>
+                    <button type="button" @click="removeHabit(index)" class="remove-button">Remove</button>
+                </div>
+            </li>
+        </ol>
+        <div v-else class="no-habits-message">No custom habits created yet.</div>
+    </div>
 </template>
 
 <script setup>
@@ -54,3 +57,78 @@ const saveEditedHabit = (index) => {
     saveHabitsToLocalStorage();
 };
 </script>
+
+<style scoped>
+.custom-created-habits {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.habit-list-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.habit-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.habit-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    /* Add this line */
+    margin-bottom: 10px;
+}
+
+.habit-name {
+    font-size: 18px;
+}
+
+.habit-edit-input {
+    font-size: 18px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.button-container {
+    display: flex;
+
+    /* Add this line */
+}
+
+.habit-button {
+    font-size: 16px;
+    padding: 8px 12px;
+    margin-left: 5px;
+    background-color: aquamarine;
+    color: #100d0d;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.habit-button:hover {
+    background-color: aqua;
+}
+
+
+.remove-button {
+    font-size: 16px;
+    padding: 8px 12px;
+    margin-left: 5px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.remove-button:hover {
+    background-color: #c82333;
+}
+</style>
