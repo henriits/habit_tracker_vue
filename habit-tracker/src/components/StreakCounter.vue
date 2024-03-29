@@ -16,8 +16,11 @@ import { ref } from 'vue';
 // Function to fetch habit completion data from localStorage
 const fetchHabitCompletionData = () => {
     const habitCompletionData = JSON.parse(localStorage.getItem('DateHabitMapping')) || {};
-    return Object.values(habitCompletionData).flat();
+    const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
+    const habits = habitCompletionData[today] || []; // Get today's habits
+    return Object.values(habitCompletionData).flat().concat(habits); // Concatenate today's habits with other habits
 };
+
 
 // Function to calculate streak
 const calculateStreak = () => {
