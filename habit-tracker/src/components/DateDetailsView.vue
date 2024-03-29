@@ -1,12 +1,11 @@
 <template>
     <div class="date-details">
-        <h1 class="section-heading">Date Details</h1>
-        <p class="formatted-date">{{ formattedDate }}</p>
+        <!-- Other content -->
         <ol v-if="habits.length > 0" class="habit-list">
             <li v-for="(habit, index) in habits" :key="index" class="habit-item">
-                <label class="habit-label">
-                    <input type="checkbox" v-model="habit.completed" @change="updateHabit(index)"
-                        class="habit-checkbox">
+                <label :class="{ 'disabled': isFutureDate }">
+                    <input type="checkbox" v-model="habit.completed" :disabled="isFutureDate"
+                        @change="updateHabit(index)" class="habit-checkbox">
                     <span>{{ habit.name }}</span>
                 </label>
                 <button @click="removeHabit(index)" type="button" class="remove-button">Remove</button>
@@ -14,9 +13,8 @@
         </ol>
         <p v-else class="no-habits">No habits found for this date.</p>
         <p class="habit-count">{{ completedHabitsCount }} out of {{ habits.length }} habits completed.</p>
-        <p v-if="allHabitsCompleted" class="completion-message">Congratulations! You've completed all habits for this
-            date.</p>
-
+        <vue-confetti v-if="allHabitsCompleted" />
+        <p v-if="isFutureDate" class="future-date-message">You cannot mark habits as complete for future dates.</p>
     </div>
 </template>
 
@@ -34,7 +32,8 @@ export default {
     data() {
         return {
             selectedDate: null,
-            habits: []
+            habits: [],
+            currentDate: new Date()
         };
     },
     created() {
@@ -57,7 +56,11 @@ export default {
         },
         allHabitsCompleted() {
             return this.habits.length > 0 && this.completedHabitsCount === this.habits.length;
-        }
+        },
+        isFutureDate() {
+            return this.selectedDate && new Date(this.selectedDate) > this.currentDate;
+        },
+
     },
     methods: {
         updateSelectedDate() {
@@ -99,6 +102,12 @@ export default {
         }
     }
 };
+
+
+
+
+
+
 </script>
 
 <style scoped>
@@ -159,5 +168,15 @@ export default {
 
 .habit-count {
     font-size: 18px;
+}
+
+.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.future-date-message {
+    color: red;
+    font-weight: bold;
 }
 </style>
