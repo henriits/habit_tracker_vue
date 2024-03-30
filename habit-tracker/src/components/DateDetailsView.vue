@@ -2,32 +2,46 @@
     <div class="date-details">
         <p class="formatted-date">{{ formattedDate }}</p>
         <ol v-if="habits.length > 0" class="habit-list">
-            <li v-for="(habit, index) in habits" :key="index" class="habit-item" :class="{ 'disabled': isFutureDate }">
+            <li
+                v-for="(habit, index) in habits"
+                :key="index"
+                class="habit-item"
+                :class="{ disabled: isFutureDate }"
+            >
                 <label class="habit-label">
-                    <input type="checkbox" v-model="habit.completed" :disabled="isFutureDate"
-                        @change="updateHabit(index)" :class="{
-            'habit-checkbox': !isFutureDate,
-            'disabled-habit-checkbox': isFutureDate
-        }">
+                    <input
+                        type="checkbox"
+                        v-model="habit.completed"
+                        :disabled="isFutureDate"
+                        @change="updateHabit(index)"
+                        :class="{
+                            'habit-checkbox': !isFutureDate,
+                            'disabled-habit-checkbox': isFutureDate
+                        }"
+                    />
 
                     <span>{{ habit.name }}</span>
                 </label>
-                <button @click="removeHabit(index)" type="button" class="remove-button">Remove</button>
+                <button @click="removeHabit(index)" type="button" class="remove-button">
+                    Remove
+                </button>
             </li>
         </ol>
         <p v-else class="no-habits">No habits found for this date.</p>
-        <p class="habit-count">{{ completedHabitsCount }} out of {{ habits.length }} habits completed.</p>
-        <p v-if="allHabitsCompleted" class="completion-message">Congratulations! You've completed all habits for this
-            date.</p>
-        <p v-if="isFutureDate" class="future-date-message">You cannot mark habits as complete for future dates.</p>
-
+        <div v-if="habits.length > 0" class="progress-bar">
+            <div class="progress" :style="{ width: progressPercentage }"></div>
+        </div>
+        <p v-if="habits.length > 0" class="habit-count">
+            {{ completedHabitsCount }} out of {{ habits.length }} habits completed.
+        </p>
+        <p v-if="allHabitsCompleted" class="completion-message">
+            Congratulations! You've completed all habits for this date.
+        </p>
+        <p v-if="isFutureDate" class="future-date-message">
+            You cannot mark habits as complete for future dates.
+        </p>
     </div>
 </template>
-
-
-<script setup>
-
-</script>
 
 <script>
 export default {
@@ -35,7 +49,8 @@ export default {
         return {
             selectedDate: null,
             habits: [],
-            currentDate: new Date()
+            currentDate: new Date(),
+            areAllHabitsCompleted: false
         };
     },
     created() {
@@ -54,7 +69,7 @@ export default {
             return `${year}-${month}-${day}`;
         },
         completedHabitsCount() {
-            return this.habits.filter(habit => habit.completed).length;
+            return this.habits.filter((habit) => habit.completed).length;
         },
         allHabitsCompleted() {
             return this.habits.length > 0 && this.completedHabitsCount === this.habits.length;
@@ -62,7 +77,10 @@ export default {
         isFutureDate() {
             return this.selectedDate && new Date(this.selectedDate) > this.currentDate;
         },
-
+        progressPercentage() {
+            if (this.habits.length === 0) return '0%';
+            return `${(this.completedHabitsCount / this.habits.length) * 100}%`;
+        }
     },
     methods: {
         updateSelectedDate() {
@@ -72,13 +90,15 @@ export default {
         fetchHabitsForDate() {
             const dateHabitMapping = JSON.parse(localStorage.getItem('DateHabitMapping'));
             if (dateHabitMapping && dateHabitMapping[this.formattedDate]) {
-                // Update habits array to include completed status from localStorage
-                this.habits = dateHabitMapping[this.formattedDate].map(habit => ({
+                this.habits = dateHabitMapping[this.formattedDate].map((habit) => ({
                     name: habit.name,
-                    completed: habit.completed || false // Use existing completed status or default to false
+                    completed: habit.completed || false
                 }));
+
+                this.areAllHabitsCompleted = this.habits.every((habit) => habit.completed);
             } else {
                 this.habits = [];
+                this.areAllHabitsCompleted = false;
             }
         },
         updateHabit(index) {
@@ -86,7 +106,7 @@ export default {
             const dateHabitMapping = JSON.parse(localStorage.getItem('DateHabitMapping')) || {};
             const habitsForDate = dateHabitMapping[this.formattedDate];
             if (habitsForDate) {
-                const habitIndex = habitsForDate.findIndex(h => h.name === habitToUpdate.name);
+                const habitIndex = habitsForDate.findIndex((h) => h.name === habitToUpdate.name);
                 if (habitIndex !== -1) {
                     habitsForDate[habitIndex].completed = habitToUpdate.completed;
                     localStorage.setItem('DateHabitMapping', JSON.stringify(dateHabitMapping));
@@ -94,12 +114,15 @@ export default {
             }
         },
         removeHabit(index) {
-            this.habits.splice(index, 1); // Remove habit from the habits array
-            this.updateLocalStorage(); // Update Local Storage after removing the habit
+            this.habits.splice(index, 1);
+            this.updateLocalStorage();
         },
         updateLocalStorage() {
             const dateHabitMapping = JSON.parse(localStorage.getItem('DateHabitMapping')) || {};
-            dateHabitMapping[this.formattedDate] = this.habits.map(habit => ({ name: habit.name, completed: habit.completed }));
+            dateHabitMapping[this.formattedDate] = this.habits.map((habit) => ({
+                name: habit.name,
+                completed: habit.completed
+            }));
             localStorage.setItem('DateHabitMapping', JSON.stringify(dateHabitMapping));
         }
     }
@@ -150,8 +173,6 @@ export default {
     cursor: not-allowed;
 }
 
-
-
 .remove-button {
     background-color: #dc3545;
     color: #fff;
@@ -175,9 +196,24 @@ export default {
     font-size: 18px;
 }
 
-
 .future-date-message {
     color: red;
     font-size: 18px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #6c757d;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    border-radius: 10px;
+    background-color: aquamarine;
+    transition: width 0.5s ease-in-out;
 }
 </style>

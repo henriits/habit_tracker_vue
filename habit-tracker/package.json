@@ -26,6 +26,7 @@
         "stylelint": "^16.2.1",
         "stylelint-config-standard": "^36.0.0",
         "stylelint-config-standard-vue": "^1.0.0",
+        "lint:style": "npx stylelint \"**/*.(s?css|vue)\"",
         "vite": "^5.1.6"
     }
 }

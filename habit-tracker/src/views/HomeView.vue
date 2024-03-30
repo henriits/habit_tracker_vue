@@ -1,13 +1,15 @@
 <template>
-  <div>
     <div>
-      <SelectHabitAndDate />
+        <div>
+            <SelectHabitAndDate />
+        </div>
+        <div>
+            <StreakCounter />
+        </div>
     </div>
-
-  </div>
-
 </template>
 
 <script setup>
-import SelectHabitAndDate from "../components/SelectHabitAndDate.vue"
+import StreakCounter from '../components/StreakCounter.vue';
+import SelectHabitAndDate from '../components/SelectHabitAndDate.vue';
 </script>

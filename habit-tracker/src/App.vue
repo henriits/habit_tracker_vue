@@ -1,10 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router';
 import DatesView from './components/DatesView.vue';
-
-
-
-
 </script>
 
 <template>
@@ -18,10 +14,6 @@ import DatesView from './components/DatesView.vue';
             <DatesView></DatesView>
         </div>
     </div>
-    <br>
-
-
-
-    <!-- Render the dynamic component -->
+    <br />
     <RouterView />
 </template>

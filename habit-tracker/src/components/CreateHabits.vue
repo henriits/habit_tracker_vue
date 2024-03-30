@@ -5,11 +5,19 @@
         <ol v-if="habits.length > 0" class="habit-list">
             <li v-for="(habit, index) in habits" :key="index" class="habit-item">
                 <span v-if="!habit.editing" class="habit-name">{{ habit.name }}</span>
-                <input v-else v-model="habit.name" @blur="saveEditedHabit(index)" class="habit-edit-input" />
+                <input
+                    v-else
+                    v-model="habit.name"
+                    @blur="saveEditedHabit(index)"
+                    class="habit-edit-input"
+                />
                 <div class="button-container">
-                    <button type="button" @click="toggleEdit(index)" class="habit-button">{{ habit.editing ? 'Save' :
-            'Edit' }}</button>
-                    <button type="button" @click="removeHabit(index)" class="remove-button">Remove</button>
+                    <button type="button" @click="toggleEdit(index)" class="habit-button">
+                        {{ habit.editing ? 'Save' : 'Edit' }}
+                    </button>
+                    <button type="button" @click="removeHabit(index)" class="remove-button">
+                        Remove
+                    </button>
                 </div>
             </li>
         </ol>
@@ -19,7 +27,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import AddHabitForm from "./AddHabitForm.vue";
+import AddHabitForm from './AddHabitForm.vue';
 
 const habits = ref([]);
 
@@ -79,8 +87,6 @@ const saveEditedHabit = (index) => {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    /* Add this line */
     margin-bottom: 10px;
 }
 
@@ -97,8 +103,6 @@ const saveEditedHabit = (index) => {
 
 .button-container {
     display: flex;
-
-    /* Add this line */
 }
 
 .habit-button {
@@ -115,7 +119,6 @@ const saveEditedHabit = (index) => {
 .habit-button:hover {
     background-color: aqua;
 }
-
 
 .remove-button {
     font-size: 16px;
