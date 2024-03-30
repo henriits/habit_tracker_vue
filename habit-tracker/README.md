@@ -1,35 +1,52 @@
-# habit-tracker
+# Habit Tracker App
 
-This template should help get you started developing with Vue 3 in Vite.
+The **Habit Tracker App** is a Vue.js application designed to help users track their daily habits. Users can view and manage their habits for specific dates, mark habits as completed, and track their progress over time.
 
-## Recommended IDE Setup
+## Features
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+-   **Date Selection**: Users can select a date to view and manage their habits for that specific date.
+-   **Habit Management**: Add, remove, and mark habits as completed for the selected date.
+-   **Dynamic Progress Bar**: Visual representation of the completion progress of habits for the selected date.
+-   **Real-time Updates**: Habit completion status and progress bar update dynamically as users interact with the app.
 
-## Customize configuration
+## Technologies Used
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+-   **Vue.js**: Frontend framework for building user interfaces and single-page applications.
+-   **LocalStorage**: Client-side storage used to persist habit data.
+-   **CSS**: Styling the application for a better user experience.
 
-## Project Setup
+## Installation
 
-```sh
-npm install
-```
+1. Clone the repository:
 
-### Compile and Hot-Reload for Development
+    ```
+    git clone <repository_url>
+    ```
 
-```sh
-npm run dev
-```
+2. Navigate to the project directory:
 
-### Compile and Minify for Production
+    ```
+    cd habit-tracker-app
+    ```
 
-```sh
-npm run build
-```
+3. Install dependencies:
 
-### Lint with [ESLint](https://eslint.org/)
+    ```
+    npm install
+    ```
 
-```sh
-npm run lint
-```
+4. Run the development server:
+
+    ```
+    npm run dev
+    ```
+
+5. Open your browser and visit `http://localhost:5173/` to view the application.
+
+## Usage
+
+1. **Select Date**: Use the date picker to select a date.
+2. **Add Habits**: Enter the name of the habit in the input field and press Enter to add it to the list.
+3. **Manage Habits**: Mark habits as completed by clicking the checkbox. Remove habits by clicking the "Remove" button.
+4. **Track Progress**: Monitor your habit completion progress with the dynamic progress bar.
+5. **Future Dates**: You cannot mark habits as complete for future dates.
