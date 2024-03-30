@@ -3,6 +3,7 @@
         <div class="streak-counter">
             <p v-if="streak > 0" class="streak-message">
                 You've completed all habits <br> for <strong>{{ streak }}</strong> consecutive day(s)!
+                <br> Keep up the good work!
             </p>
             <p v-else class="no-streak-message">
                 You haven't started a streak yet.
