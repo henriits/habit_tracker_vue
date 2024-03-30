@@ -33,19 +33,51 @@ export default {
                 { label: '🚭 Quit Smoking', value: '🚭' },
                 { label: '📝 Journalizing', value: '📝' },
                 { label: '🎲 Gaming', value: '🎲' },
-                { label: '🧘‍♂️ Yoga', value: '🧘‍♂️' },
                 { label: '🚶 Walking', value: '🚶' },
-                { label: '🚰 Drink Water', value: '🚰' }
+                { label: '🚰 Drink Water', value: '🚰' },
+                { label: '🎬 Movie Night', value: '🎬' },
+                { label: '🍳 Cooking', value: '🍳' },
+                { label: '🍰 Baking', value: '🍰' },
+                { label: '🎭 Theater', value: '🎭' },
+                { label: '🎮 Video Games', value: '🎮' },
+                { label: '🧩 Puzzles', value: '🧩' },
+                { label: '📸 Photography', value: '📸' },
+                { label: '🖋️ Writing', value: '🖋️' },
+                { label: '✈️ Travel', value: '✈️' },
+                { label: '🏞️ Nature Walks', value: '🏞️' },
+                { label: '🚣‍♂️ Rowing', value: '🚣‍♂️' },
+                { label: '🚴 Cycling', value: '🚴' },
+                { label: '🎤 Karaoke', value: '🎤' },
+                { label: '🏹 Archery', value: '🏹' },
+                { label: '🏕️ Camping', value: '🏕️' },
+                { label: '🎡 Amusement Parks', value: '🎡' },
+                { label: '🛹 Skateboarding', value: '🛹' },
+                { label: '🎭 Improv Comedy', value: '🎭' },
+                { label: '🍷 Wine Tasting', value: '🍷' },
+                { label: '🛫 Paragliding', value: '🛫' },
+                { label: '🌋 Volcano Watching', value: '🌋' },
+                { label: '🏄 Surfing', value: '🏄' },
+                { label: '🚤 Sailing', value: '🚤' },
+                { label: '🏔️ Mountaineering', value: '🏔️' },
+                { label: '🎨 Pottery', value: '🎨' },
+                { label: '🎳 Bowling', value: '🎳' },
+                { label: '🎬 Film Making', value: '🎬' },
+                { label: '🚗 Road Trips', value: '🚗' },
+                { label: '🌊 Scuba Diving', value: '🌊' },
+                { label: '🎣 Fishing', value: '🎣' },
+                { label: '🚁 Helicopter Tours', value: '🚁' },
+                { label: '🌟 Other', value: '🌟' }
             ]
+
         };
     },
     methods: {
         addHabit() {
-            if (this.habitName.trim() === '') return; // Prevent adding empty habit
-            const habitWithEmoji = `${this.selectedEmoji} ${this.habitName}`; // Combine emoji and habit name
-            this.$emit('add', habitWithEmoji); // Emit an event with the new habit name
-            this.habitName = ''; // Clear the input field
-            this.selectedEmoji = ''; // Clear the selected emoji
+            if (this.habitName.trim() === '') return;
+            const habitWithEmoji = `${this.selectedEmoji} ${this.habitName}`;
+            this.$emit('add', habitWithEmoji);
+            this.habitName = '';
+            this.selectedEmoji = '';
         }
     }
 };

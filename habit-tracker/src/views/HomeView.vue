@@ -15,8 +15,4 @@
 import StreakCounter from "../components/StreakCounter.vue";
 import SelectHabitAndDate from "../components/SelectHabitAndDate.vue";
 
-
-
-
-
 </script>

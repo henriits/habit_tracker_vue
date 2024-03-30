@@ -79,11 +79,9 @@ export default {
                     completed: habit.completed || false
                 }));
 
-                // Update areAllHabitsCompleted based on the fetched habits
                 this.areAllHabitsCompleted = this.habits.every(habit => habit.completed);
             } else {
                 this.habits = [];
-                // If there are no habits for the selected date, set areAllHabitsCompleted to false
                 this.areAllHabitsCompleted = false;
             }
         },
@@ -100,8 +98,8 @@ export default {
             }
         },
         removeHabit(index) {
-            this.habits.splice(index, 1); // Remove habit from the habits array
-            this.updateLocalStorage(); // Update Local Storage after removing the habit
+            this.habits.splice(index, 1);
+            this.updateLocalStorage();
         },
         updateLocalStorage() {
             const dateHabitMapping = JSON.parse(localStorage.getItem('DateHabitMapping')) || {};

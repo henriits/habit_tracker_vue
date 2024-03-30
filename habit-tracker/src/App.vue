@@ -19,9 +19,5 @@ import DatesView from './components/DatesView.vue';
         </div>
     </div>
     <br>
-
-
-
-    <!-- Render the dynamic component -->
     <RouterView />
 </template>

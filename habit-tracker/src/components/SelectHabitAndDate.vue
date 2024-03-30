@@ -45,56 +45,45 @@ onMounted(() => {
 });
 
 function saveHabitToSelectedDate(date, habit) {
-    // Retrieve the existing date-habit mapping from localStorage
     const dateHabitMapping = JSON.parse(localStorage.getItem('DateHabitMapping')) || {};
-
-    // If habits for the selected date already exist, check if the habit already exists before adding it
     if (Array.isArray(dateHabitMapping[date])) {
         if (!dateHabitMapping[date].includes(habit)) {
-            // Add the habit with completed status (initially false)
             dateHabitMapping[date].push({ name: habit, completed: false });
-            habitAddedNotification.value = true; // Set habitAddedNotification to true
+            habitAddedNotification.value = true;
             setTimeout(() => {
-                habitAddedNotification.value = false; // Hide notification after 3 seconds
+                habitAddedNotification.value = false;
             }, 3000);
         } else {
-            // Show notification to inform the user that the habit already exists
             showNotification.value = true;
             setTimeout(() => {
                 showNotification.value = false;
-            }, 3000); // Hide notification after 3 seconds
+            }, 3000);
         }
     } else {
         // If there are no habits associated with the selected date yet, create a new array with the new habit
         dateHabitMapping[date] = [{ name: habit, completed: false }];
-        habitAddedNotification.value = true; // Set habitAddedNotification to true
+        habitAddedNotification.value = true;
         setTimeout(() => {
-            habitAddedNotification.value = false; // Hide notification after 3 seconds
+            habitAddedNotification.value = false;
         }, 3000);
     }
-
-    // Save the updated date-habit mapping back to localStorage
     localStorage.setItem('DateHabitMapping', JSON.stringify(dateHabitMapping));
 }
 
 function attachHabitToSelectedDate() {
     if (!selectedDate.value || !selectedHabit.value) return;
-
-    // Check if the habit already exists for the selected date
     const dateHabitMapping = JSON.parse(localStorage.getItem('DateHabitMapping')) || {};
     if (Array.isArray(dateHabitMapping[selectedDate.value])) {
         const existingHabits = dateHabitMapping[selectedDate.value].map(habit => habit.name);
         if (existingHabits.includes(selectedHabit.value)) {
-            // If the habit already exists, show notification and return
             showNotification.value = true;
             setTimeout(() => {
                 showNotification.value = false;
-            }, 3000); // Hide notification after 3 seconds
+            }, 3000);
             return;
         }
     }
 
-    // Assuming you have a function to save the date-habit mapping to localStorage
     saveHabitToSelectedDate(selectedDate.value, selectedHabit.value);
 }
 </script>

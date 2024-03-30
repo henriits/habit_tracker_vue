@@ -79,8 +79,6 @@ const saveEditedHabit = (index) => {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    /* Add this line */
     margin-bottom: 10px;
 }
 
@@ -97,8 +95,6 @@ const saveEditedHabit = (index) => {
 
 .button-container {
     display: flex;
-
-    /* Add this line */
 }
 
 .habit-button {

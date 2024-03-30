@@ -98,9 +98,6 @@ watchEffect(() => {
     font-size: 24px;
     display: flex;
     align-items: center;
-
-
-    /* Center vertically */
 }
 
 .streak-message strong,
@@ -109,8 +106,6 @@ watchEffect(() => {
     color: aquamarine;
     font-weight: bold;
     margin-left: 5px;
-
-    /* Add some space between the text and number */
 }
 
 .no-streak-message,

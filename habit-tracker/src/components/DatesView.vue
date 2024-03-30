@@ -22,10 +22,9 @@ export default {
     },
     mounted() {
         this.generateDates();
-        // Automatically scroll back to the middle after a delay
         setTimeout(() => {
             this.scrollToMiddle();
-        }, 3000); // Adjust the delay as needed
+        }, 3000);
     },
     methods: {
         generateDates() {
@@ -60,7 +59,7 @@ export default {
             clearTimeout(this.scrollTimeout);
             this.scrollTimeout = setTimeout(() => {
                 this.scrollToMiddle();
-            }, 5000); // Adjust the delay as needed
+            }, 5000);
         }
     }
 };
