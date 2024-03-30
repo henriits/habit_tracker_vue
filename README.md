@@ -50,3 +50,11 @@ The **Habit Tracker App** is a Vue.js application designed to help users track t
 3. **Manage Habits**: Mark habits as completed by clicking the checkbox. Remove habits by clicking the "Remove" button.
 4. **Track Progress**: Monitor your habit completion progress with the dynamic progress bar.
 5. **Future Dates**: You cannot mark habits as complete for future dates.
+
+
+
+![1](https://github.com/henriits/habit_tracker_vue/assets/121551949/9e1abcbd-db76-49c6-b170-1ec8b8a0b291)
+![2](https://github.com/henriits/habit_tracker_vue/assets/121551949/4cf80447-fc34-428c-bdb8-bb7f3526557a)
+![3](https://github.com/henriits/habit_tracker_vue/assets/121551949/c4bcd85b-9e8a-4cfc-9683-891ddb8881df)
+![4](https://github.com/henriits/habit_tracker_vue/assets/121551949/eb70e788-862a-4723-a72f-54ec3dfd7627)
+![5](https://github.com/henriits/habit_tracker_vue/assets/121551949/c5c9845f-af01-4497-9a4c-d8a757a6d4da)
