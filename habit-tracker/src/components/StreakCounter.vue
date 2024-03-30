@@ -1,11 +1,13 @@
 <template>
-    <div class="streak-counter">
-        <p v-if="streak > 0" class="streak-message">
-            You've completed all habits for <strong>{{ streak }}</strong> consecutive days!
-        </p>
-        <p v-else class="no-streak-message">
-            You haven't started any streak yet.
-        </p>
+    <div class="streak-display">
+        <div class="streak-counter">
+            <p v-if="streak > 0" class="streak-message">
+                You've completed all habits <br> for <strong>{{ streak }}</strong> consecutive day(s)!
+            </p>
+            <p v-else class="no-streak-message">
+                You haven't started a streak yet.
+            </p>
+        </div>
     </div>
 </template>
 
@@ -51,17 +53,32 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.streak-counter {
-    margin-top: 20px;
+.streak-display {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
 }
 
-.streak-message {
-    font-size: 18px;
-    color: green;
+.streak-message,
+.no-streak-message {
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+}
+
+.streak-message strong {
+    font-size: 36px;
+    color: aquamarine;
+    font-weight: bold;
 }
 
 .no-streak-message {
-    font-size: 18px;
-    color: red;
+    color: #666;
+}
+
+.streak-counter {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
+    display: inline-block;
 }
 </style>
