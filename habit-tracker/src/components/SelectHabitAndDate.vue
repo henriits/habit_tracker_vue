@@ -2,13 +2,15 @@
     <div class="select-date-and-habit">
         <div class="main-content">
             <h3 class="content-heading">Select a Date and a Habit!</h3>
-            <input type="date" v-model="selectedDate" aria-label="input" class="custom-input">
+            <input type="date" v-model="selectedDate" aria-label="input" class="custom-input" />
             <select v-model="selectedHabit" aria-label="select" class="custom-select">
                 <option disabled value="">Please select a habit</option>
-                <option v-for="(habit, index) in habits" :key="index" :value="habit.name">{{ habit.name }}</option>
+                <option v-for="(habit, index) in habits" :key="index" :value="habit.name">
+                    {{ habit.name }}
+                </option>
             </select>
 
-            <br>
+            <br />
 
             <button @click="attachHabitToSelectedDate" type="button" class="custom-button">
                 Attach Habit
@@ -74,7 +76,7 @@ function attachHabitToSelectedDate() {
     if (!selectedDate.value || !selectedHabit.value) return;
     const dateHabitMapping = JSON.parse(localStorage.getItem('DateHabitMapping')) || {};
     if (Array.isArray(dateHabitMapping[selectedDate.value])) {
-        const existingHabits = dateHabitMapping[selectedDate.value].map(habit => habit.name);
+        const existingHabits = dateHabitMapping[selectedDate.value].map((habit) => habit.name);
         if (existingHabits.includes(selectedHabit.value)) {
             showNotification.value = true;
             setTimeout(() => {
@@ -92,7 +94,6 @@ function attachHabitToSelectedDate() {
 .select-date-and-habit {
     max-width: 400px;
     margin: 0 auto;
-
 }
 
 .content-heading {

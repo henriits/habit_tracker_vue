@@ -1,12 +1,20 @@
 <template>
     <div>
         <form @submit.prevent="addHabit" class="habit-form">
-            <input type="text" id="habitName" v-model="habitName" required placeholder="Enter Habit name"
-                class="habit-input">
+            <input
+                type="text"
+                id="habitName"
+                v-model="habitName"
+                required
+                placeholder="Enter Habit name"
+                class="habit-input"
+            />
 
             <select v-model="selectedEmoji" id="habitEmoji" class="habit-select">
                 <option disabled value="">Please select an Emoji</option>
-                <option v-for="emoji in emojis" :key="emoji.value" :value="emoji.value">{{ emoji.label }}</option>
+                <option v-for="emoji in emojis" :key="emoji.value" :value="emoji.value">
+                    {{ emoji.label }}
+                </option>
             </select>
             <button type="submit" class="habit-button">Create New Habit</button>
         </form>
@@ -68,7 +76,6 @@ export default {
                 { label: '🚁 Helicopter Tours', value: '🚁' },
                 { label: '🌟 Other', value: '🌟' }
             ]
-
         };
     },
     methods: {

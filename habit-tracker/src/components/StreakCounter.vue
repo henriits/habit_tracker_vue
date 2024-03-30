@@ -4,13 +4,12 @@
             <p v-if="streak > 0" class="streak-message">
                 Current Streak <strong>{{ streak }} </strong> day(s)!
             </p>
-            <p v-else class="no-streak-message">
-                You haven't started a streak yet.
-            </p>
+            <p v-else class="no-streak-message">You haven't started a streak yet.</p>
         </div>
         <div class="highest-streak">
             <p v-if="highestStreak > 0" class="highest-streak-message">
-                Your overall highest streak<strong>{{ highestStreak }}</strong>day(s)!
+                Your overall highest streak<strong>{{ highestStreak }}</strong
+                >day(s)!
             </p>
             <p v-else class="no-highest-streak-message">
                 You haven't achieved your highest streak yet.
@@ -18,7 +17,6 @@
         </div>
     </div>
 </template>
-
 
 <script setup>
 import { ref, onMounted, watchEffect } from 'vue';
@@ -60,7 +58,6 @@ function calculateStreak(dateHabitMapping) {
     updateHighestStreak(currentStreak);
 }
 
-
 onMounted(() => {
     const data = localStorage.getItem('DateHabitMapping');
     if (data) {
@@ -78,9 +75,6 @@ watchEffect(() => {
     updateHighestStreak(streak.value);
 });
 </script>
-
-
-
 
 <style scoped>
 .streak-display,
