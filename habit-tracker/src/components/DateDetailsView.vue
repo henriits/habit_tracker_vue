@@ -24,11 +24,6 @@
     </div>
 </template>
 
-
-<script setup>
-
-</script>
-
 <script>
 export default {
     data() {
@@ -61,8 +56,7 @@ export default {
         },
         isFutureDate() {
             return this.selectedDate && new Date(this.selectedDate) > this.currentDate;
-        },
-
+        }
     },
     methods: {
         updateSelectedDate() {
@@ -77,6 +71,9 @@ export default {
                     name: habit.name,
                     completed: habit.completed || false // Use existing completed status or default to false
                 }));
+
+                // Check if all habits for this date are completed and update allHabitsCompleted property
+                this.allHabitsCompleted = this.habits.every(habit => habit.completed);
             } else {
                 this.habits = [];
             }
@@ -150,8 +147,6 @@ export default {
     cursor: not-allowed;
 }
 
-
-
 .remove-button {
     background-color: #dc3545;
     color: #fff;
@@ -174,7 +169,6 @@ export default {
 .habit-count {
     font-size: 18px;
 }
-
 
 .future-date-message {
     color: red;

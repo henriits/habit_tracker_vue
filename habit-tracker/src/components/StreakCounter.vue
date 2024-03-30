@@ -13,24 +13,25 @@
 <script setup>
 import { ref } from 'vue';
 
-// Function to fetch habit completion data from localStorage
 const fetchHabitCompletionData = () => {
     const habitCompletionData = JSON.parse(localStorage.getItem('DateHabitMapping')) || {};
-    const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
-    const habits = habitCompletionData[today] || []; // Get today's habits
-    return Object.values(habitCompletionData).flat().concat(habits); // Concatenate today's habits with other habits
+    const allHabits = Object.values(habitCompletionData).flat(); // Get all habits from localStorage
+    return allHabits;
 };
 
 
-// Function to calculate streak
 const calculateStreak = () => {
     const habitCompletionData = fetchHabitCompletionData();
     let streak = 0;
+    let consecutiveCompletedDays = 0;
     for (let i = habitCompletionData.length - 1; i >= 0; i -= 1) {
         if (habitCompletionData[i].completed) {
-            streak += 1;
+            consecutiveCompletedDays += 1;
+            if (consecutiveCompletedDays === 1) {
+                streak += 1;
+            }
         } else {
-            break;
+            consecutiveCompletedDays = 0;
         }
     }
     return streak;
