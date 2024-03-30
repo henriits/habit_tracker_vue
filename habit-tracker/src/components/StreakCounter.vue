@@ -21,11 +21,17 @@
 
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watchEffect } from 'vue';
 
 const streak = ref(0);
 const highestStreak = ref(0);
 
+function updateHighestStreak(currentStreak) {
+    if (currentStreak > highestStreak.value) {
+        highestStreak.value = currentStreak;
+        localStorage.setItem('HighestStreak', currentStreak.toString());
+    }
+}
 function calculateStreak(dateHabitMapping) {
     const dates = Object.keys(dateHabitMapping);
     let currentStreak = 0;
@@ -51,11 +57,9 @@ function calculateStreak(dateHabitMapping) {
 
     streak.value = currentStreak;
 
-    if (currentStreak > highestStreak.value) {
-        highestStreak.value = currentStreak;
-        localStorage.setItem('HighestStreak', currentStreak);
-    }
+    updateHighestStreak(currentStreak);
 }
+
 
 onMounted(() => {
     const data = localStorage.getItem('DateHabitMapping');
@@ -69,7 +73,13 @@ onMounted(() => {
         highestStreak.value = parseInt(savedHighestStreak, 10);
     }
 });
+
+watchEffect(() => {
+    updateHighestStreak(streak.value);
+});
 </script>
+
+
 
 
 <style scoped>
