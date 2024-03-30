@@ -20,13 +20,13 @@ The **Habit Tracker App** is a Vue.js application designed to help users track t
 1. Clone the repository:
 
     ```
-    git clone <repository_url>
+    git clone https://github.com/henriits/habit_tracker_vue.git 
     ```
 
 2. Navigate to the project directory:
 
     ```
-    cd habit-tracker-app
+    cd habit-tracker
     ```
 
 3. Install dependencies:
