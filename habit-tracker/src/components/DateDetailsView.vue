@@ -16,11 +16,14 @@
             </li>
         </ol>
         <p v-else class="no-habits">No habits found for this date.</p>
-        <p class="habit-count">{{ completedHabitsCount }} out of {{ habits.length }} habits completed.</p>
+        <div v-if="habits.length > 0" class="progress-bar">
+            <div class="progress" :style="{ width: progressPercentage }"></div>
+        </div>
+        <p v-if="habits.length > 0" class="habit-count">{{ completedHabitsCount }} out of {{ habits.length }} habits
+            completed.</p>
         <p v-if="allHabitsCompleted" class="completion-message">Congratulations! You've completed all habits for this
             date.</p>
         <p v-if="isFutureDate" class="future-date-message">You cannot mark habits as complete for future dates.</p>
-
     </div>
 </template>
 
@@ -40,9 +43,6 @@ export default {
     watch: {
         '$route.params.date': 'updateSelectedDate'
     },
-    areAllHabitsCompleted(newVal) {
-        this.allHabitsCompleted = newVal;
-    },
     computed: {
         formattedDate() {
             if (!this.selectedDate) return '';
@@ -60,6 +60,10 @@ export default {
         },
         isFutureDate() {
             return this.selectedDate && new Date(this.selectedDate) > this.currentDate;
+        },
+        progressPercentage() {
+            if (this.habits.length === 0) return '0%';
+            return `${(this.completedHabitsCount / this.habits.length) * 100}%`;
         }
     },
     methods: {
@@ -178,5 +182,21 @@ export default {
 .future-date-message {
     color: red;
     font-size: 18px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #6c757d;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    border-radius: 10px;
+    background-color: aquamarine;
+    transition: width 0.5s ease-in-out;
 }
 </style>
