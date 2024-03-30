@@ -14,24 +14,17 @@ import { ref, onMounted } from 'vue';
 
 const streak = ref(0);
 
-onMounted(() => {
-    const data = localStorage.getItem('DateHabitMapping');
-    if (data) {
-        const dateHabitMapping = JSON.parse(data);
-        calculateStreak(dateHabitMapping);
-    }
-});
 
 function calculateStreak(dateHabitMapping) {
     const dates = Object.keys(dateHabitMapping);
     let currentStreak = 0;
 
-    for (let i = 0; i < dates.length; i++) {
+    for (let i = 0; i < dates.length; i += 1) {
         const date = dates[i];
         const habits = dateHabitMapping[date];
         let allCompleted = true;
 
-        for (let j = 0; j < habits.length; j++) {
+        for (let j = 0; j < habits.length; j += 1) {
             if (!habits[j].completed) {
                 allCompleted = false;
                 break;
@@ -39,14 +32,22 @@ function calculateStreak(dateHabitMapping) {
         }
 
         if (allCompleted) {
-            currentStreak++;
+            currentStreak += 1;
         } else {
-            break; // Streak broken, stop counting
+            break;
         }
     }
 
     streak.value = currentStreak;
 }
+
+onMounted(() => {
+    const data = localStorage.getItem('DateHabitMapping');
+    if (data) {
+        const dateHabitMapping = JSON.parse(data);
+        calculateStreak(dateHabitMapping);
+    }
+});
 </script>
 
 <style scoped>
