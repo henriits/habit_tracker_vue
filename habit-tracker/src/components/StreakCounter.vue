@@ -41,12 +41,19 @@ const calculateStreak = () => {
         streak = consecutiveCompletedDays;
     }
 
+    // If the streak was broken by an incomplete day, reset it to 0
+    if (habitCompletionData.length > 0 && !habitCompletionData[0].completed) {
+        streak = 0;
+    }
+
     return streak;
 };
 
 // Streak ref
 const streak = ref(calculateStreak());
 </script>
+
+
 
 
 <style scoped>
