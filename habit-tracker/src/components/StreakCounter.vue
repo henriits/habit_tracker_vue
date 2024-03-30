@@ -19,27 +19,35 @@ const fetchHabitCompletionData = () => {
     return allHabits;
 };
 
-
 const calculateStreak = () => {
     const habitCompletionData = fetchHabitCompletionData();
     let streak = 0;
     let consecutiveCompletedDays = 0;
+
     for (let i = habitCompletionData.length - 1; i >= 0; i -= 1) {
         if (habitCompletionData[i].completed) {
             consecutiveCompletedDays += 1;
-            if (consecutiveCompletedDays === 1) {
-                streak += 1;
-            }
         } else {
+            // If the streak is broken, update the streak value and reset the consecutive days count
+            if (consecutiveCompletedDays > streak) {
+                streak = consecutiveCompletedDays;
+            }
             consecutiveCompletedDays = 0;
         }
     }
+
+    // Check if the streak continues until the end of the habit data
+    if (consecutiveCompletedDays > streak) {
+        streak = consecutiveCompletedDays;
+    }
+
     return streak;
 };
 
 // Streak ref
 const streak = ref(calculateStreak());
 </script>
+
 
 <style scoped>
 .streak-counter {
