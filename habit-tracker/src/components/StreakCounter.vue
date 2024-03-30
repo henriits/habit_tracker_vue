@@ -1,4 +1,3 @@
-<!-- StreakCounter.vue -->
 <template>
     <div class="streak-counter">
         <p v-if="streak > 0" class="streak-message">
@@ -11,50 +10,44 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
-const fetchHabitCompletionData = () => {
-    const habitCompletionData = JSON.parse(localStorage.getItem('DateHabitMapping')) || {};
-    const allHabits = Object.values(habitCompletionData).flat(); // Get all habits from localStorage
-    return allHabits;
-};
+const streak = ref(0);
 
-const calculateStreak = () => {
-    const habitCompletionData = fetchHabitCompletionData();
-    let streak = 0;
-    let consecutiveCompletedDays = 0;
+onMounted(() => {
+    const data = localStorage.getItem('DateHabitMapping');
+    if (data) {
+        const dateHabitMapping = JSON.parse(data);
+        calculateStreak(dateHabitMapping);
+    }
+});
 
-    for (let i = habitCompletionData.length - 1; i >= 0; i -= 1) {
-        if (habitCompletionData[i].completed) {
-            consecutiveCompletedDays += 1;
-        } else {
-            // If the streak is broken, update the streak value and reset the consecutive days count
-            if (consecutiveCompletedDays > streak) {
-                streak = consecutiveCompletedDays;
+function calculateStreak(dateHabitMapping) {
+    const dates = Object.keys(dateHabitMapping);
+    let currentStreak = 0;
+
+    for (let i = 0; i < dates.length; i++) {
+        const date = dates[i];
+        const habits = dateHabitMapping[date];
+        let allCompleted = true;
+
+        for (let j = 0; j < habits.length; j++) {
+            if (!habits[j].completed) {
+                allCompleted = false;
+                break;
             }
-            consecutiveCompletedDays = 0;
+        }
+
+        if (allCompleted) {
+            currentStreak++;
+        } else {
+            break; // Streak broken, stop counting
         }
     }
 
-    // Check if the streak continues until the end of the habit data
-    if (consecutiveCompletedDays > streak) {
-        streak = consecutiveCompletedDays;
-    }
-
-    // If the streak was broken by an incomplete day, reset it to 0
-    if (habitCompletionData.length > 0 && !habitCompletionData[0].completed) {
-        streak = 0;
-    }
-
-    return streak;
-};
-
-// Streak ref
-const streak = ref(calculateStreak());
+    streak.value = currentStreak;
+}
 </script>
-
-
-
 
 <style scoped>
 .streak-counter {

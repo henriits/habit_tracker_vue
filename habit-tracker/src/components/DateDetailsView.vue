@@ -30,7 +30,8 @@ export default {
         return {
             selectedDate: null,
             habits: [],
-            currentDate: new Date()
+            currentDate: new Date(),
+            areAllHabitsCompleted: false
         };
     },
     created() {
@@ -38,6 +39,9 @@ export default {
     },
     watch: {
         '$route.params.date': 'updateSelectedDate'
+    },
+    areAllHabitsCompleted(newVal) {
+        this.allHabitsCompleted = newVal;
     },
     computed: {
         formattedDate() {
@@ -66,16 +70,17 @@ export default {
         fetchHabitsForDate() {
             const dateHabitMapping = JSON.parse(localStorage.getItem('DateHabitMapping'));
             if (dateHabitMapping && dateHabitMapping[this.formattedDate]) {
-                // Update habits array to include completed status from localStorage
                 this.habits = dateHabitMapping[this.formattedDate].map(habit => ({
                     name: habit.name,
-                    completed: habit.completed || false // Use existing completed status or default to false
+                    completed: habit.completed || false
                 }));
 
-                // Check if all habits for this date are completed and update allHabitsCompleted property
-                this.allHabitsCompleted = this.habits.every(habit => habit.completed);
+                // Update areAllHabitsCompleted based on the fetched habits
+                this.areAllHabitsCompleted = this.habits.every(habit => habit.completed);
             } else {
                 this.habits = [];
+                // If there are no habits for the selected date, set areAllHabitsCompleted to false
+                this.areAllHabitsCompleted = false;
             }
         },
         updateHabit(index) {
