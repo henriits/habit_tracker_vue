@@ -28,26 +28,24 @@
 </template>
 
 <script setup>
-import { onMounted, ref, watchEffect } from 'vue';
+import { onMounted, ref } from "vue";
 
 const habits = ref([]);
-const selectedDate = ref('');
-const selectedHabit = ref('');
+const selectedDate = ref("");
+const selectedHabit = ref("");
 const showNotification = ref(false);
 const habitAddedNotification = ref(false);
 
 onMounted(() => {
-    // Watch for changes in localStorage and update habits accordingly
-    watchEffect(() => {
-        const savedHabits = localStorage.getItem('CreatedHabits');
-        if (savedHabits) {
-            habits.value = JSON.parse(savedHabits);
-        }
-    });
+
+    const savedHabits = localStorage.getItem("CreatedHabits");
+    if (savedHabits) {
+        habits.value = JSON.parse(savedHabits);
+    }
 });
 
 function saveHabitToSelectedDate(date, habit) {
-    const dateHabitMapping = JSON.parse(localStorage.getItem('DateHabitMapping')) || {};
+    const dateHabitMapping = JSON.parse(localStorage.getItem("DateHabitMapping")) || {};
     if (Array.isArray(dateHabitMapping[date])) {
         if (!dateHabitMapping[date].includes(habit)) {
             dateHabitMapping[date].push({ name: habit, completed: false });
@@ -69,14 +67,16 @@ function saveHabitToSelectedDate(date, habit) {
             habitAddedNotification.value = false;
         }, 3000);
     }
-    localStorage.setItem('DateHabitMapping', JSON.stringify(dateHabitMapping));
+    localStorage.setItem("DateHabitMapping", JSON.stringify(dateHabitMapping));
 }
 
 function attachHabitToSelectedDate() {
     if (!selectedDate.value || !selectedHabit.value) return;
-    const dateHabitMapping = JSON.parse(localStorage.getItem('DateHabitMapping')) || {};
+    const dateHabitMapping = JSON.parse(localStorage.getItem("DateHabitMapping")) || {};
     if (Array.isArray(dateHabitMapping[selectedDate.value])) {
-        const existingHabits = dateHabitMapping[selectedDate.value].map((habit) => habit.name);
+        const existingHabits = dateHabitMapping[selectedDate.value].map(
+            (habit) => habit.name
+        );
         if (existingHabits.includes(selectedHabit.value)) {
             showNotification.value = true;
             setTimeout(() => {
