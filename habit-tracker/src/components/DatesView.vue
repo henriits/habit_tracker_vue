@@ -95,6 +95,8 @@ onBeforeUnmount(() => {
   padding: 10px;
   margin: 5px;
   cursor: pointer;
+  width: 60px;
+  border-radius: 30px;
 }
 
 .date-div:hover {
