@@ -132,6 +132,7 @@ updateSelectedDate();
 .date-details {
   max-width: 500px;
   margin: 0 auto;
+  padding: 20px;
 }
 
 .section-heading {
