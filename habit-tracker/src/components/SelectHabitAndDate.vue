@@ -89,7 +89,7 @@ function attachHabitToSelectedDate() {
 }
 </script>
 
-<style>
+<style scoped>
 .select-date-and-habit {
   max-width: 400px;
   margin: 0 auto;
