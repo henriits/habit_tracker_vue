@@ -13,17 +13,22 @@
       </div>
     </div>
   </div>
+  <div class="scroll-button-position">
+    <button class="custom-button" type="button" @click="scrollToMiddle">
+      Scroll to Today
+    </button>
+  </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 
 const currentDate = new Date();
-const numberOfDaysBefore = 7;
-const numberOfDaysAfter = 7;
+const numberOfDaysBefore = 10;
+const numberOfDaysAfter = 10;
 const dates = ref([]);
 const checked = ref([]);
 const scrollContainer = ref(null);
@@ -49,10 +54,17 @@ const isCurrentDate = (dateString) => {
   );
 };
 
-const handleDateClick = (date) => {
-  router.push({ name: "dateDetails", params: { date } });
+const formatDate = (date) => {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  return `${year}-${month}-${day}`;
 };
 
+const handleDateClick = (date) => {
+  const formattedDate = formatDate(new Date(date));
+  router.push({ name: "dateDetails", params: { date: formattedDate } });
+};
 const scrollToMiddle = () => {
   const container = scrollContainer.value;
   if (container) {
@@ -63,27 +75,22 @@ const scrollToMiddle = () => {
 
 const handleScroll = () => {
   clearTimeout(scrollTimeout.value);
-  scrollTimeout.value = setTimeout(() => {
-    scrollToMiddle();
-  }, 5000);
 };
 
 onMounted(() => {
   generateDates();
-  setTimeout(() => {
-    scrollToMiddle();
-  }, 3000);
-});
-
-onBeforeUnmount(() => {
-  clearTimeout(scrollTimeout.value);
 });
 </script>
 
 <style scoped>
+.scroll-button-position {
+  margin: 30px;
+}
+
 .date-div-container {
   display: inline-block;
   width: max-content;
+  margin: 20px;
 }
 
 .date-div {
@@ -95,6 +102,8 @@ onBeforeUnmount(() => {
   padding: 10px;
   margin: 5px;
   cursor: pointer;
+  width: 60px;
+  border-radius: 30px;
 }
 
 .date-div:hover {
