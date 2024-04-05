@@ -159,6 +159,8 @@ p {
 
 .date-div-container {
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-wrap: nowrap;
   width: 100%;
   margin: 20px;
