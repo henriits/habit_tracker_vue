@@ -1,23 +1,25 @@
 <template>
-  <div>
-    <label for="daysBeforeInput" class="input-label">Days Before:</label>
-    <input
-      id="daysBeforeInput"
-      type="number"
-      v-model="numberOfDaysBefore"
-      class="days-input"
-      min="0"
-    />
-    <label for="daysAfterInput" class="input-label">Days After:</label>
-    <input
-      id="daysAfterInput"
-      type="number"
-      v-model="numberOfDaysAfter"
-      class="days-input"
-      min="0"
-    />
+  <div class="date-container">
+    <div class="input-section">
+      <label for="daysBeforeInput" class="input-label">Days Before:</label>
+      <input
+        id="daysBeforeInput"
+        type="number"
+        v-model="numberOfDaysBefore"
+        class="days-input"
+        min="0"
+      />
+      <label for="daysAfterInput" class="input-label">Days After:</label>
+      <input
+        id="daysAfterInput"
+        type="number"
+        v-model="numberOfDaysAfter"
+        class="days-input"
+        min="0"
+      />
+    </div>
+    <p class="sentence">Please select the number of days before and after today.</p>
   </div>
-  <p class="sentence">Please select the number of days before and after today.</p>
 
   <div ref="scrollContainer" class="scroll-container" @scroll="handleScroll">
     <div class="date-div-container">
@@ -37,7 +39,7 @@
     </div>
   </div>
   <div class="scroll-button-position">
-    <button class="custom-button" type="button" @click="scrollToMiddle">
+    <button class="scroll-button" type="button" @click="scrollToMiddle">
       Scroll to Selected Date
     </button>
   </div>
@@ -107,6 +109,11 @@ watch([numberOfDaysBefore, numberOfDaysAfter], () => {
 </script>
 
 <style scoped>
+.input-section {
+  display: flex;
+  align-items: center;
+}
+
 .input-label {
   font-size: 16px;
   margin-right: 10px;
@@ -126,8 +133,20 @@ watch([numberOfDaysBefore, numberOfDaysAfter], () => {
   margin-top: 10px;
 }
 
-.scroll-button-position {
-  margin: 30px;
+.scroll-button {
+  font-size: 16px;
+  padding: 8px 12px;
+  margin-left: 5px;
+  margin-top: 30px;
+  background-color: aquamarine;
+  color: #100d0d;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.scroll-button:hover {
+  background-color: aqua;
 }
 
 .date-div-container {
@@ -153,11 +172,16 @@ watch([numberOfDaysBefore, numberOfDaysAfter], () => {
   background-color: #f0f0f042;
 }
 
-.scroll-container {
+.scroll-container,
+.date-container,
+.scroll-button-position {
   direction: ltr;
-  display: block;
   overflow: auto;
   height: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .glow-selected {
