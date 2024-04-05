@@ -6,7 +6,7 @@ import DatesView from "./components/DatesView.vue";
 <template>
   <div>
     <nav class="nav-bar">
-      <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/">Add Habits</RouterLink>
       <RouterLink :to="{ name: 'createHabits' }">Create Habits</RouterLink>
       <h1 class="title">DailyDrive</h1>
     </nav>

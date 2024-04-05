@@ -41,8 +41,9 @@
     </div>
   </div>
   <div class="scroll-button-position">
+    <p>Select a date to view your added habits!</p>
     <button class="scroll-button" type="button" @click="scrollToMiddle">
-      Scroll to Selected Date
+      Scroll to Middle
     </button>
   </div>
 </template>
@@ -111,6 +112,10 @@ watch([numberOfDaysBefore, numberOfDaysAfter], () => {
 </script>
 
 <style scoped>
+p {
+  color: #6c757d;
+}
+
 .input-section {
   display: flex;
   align-items: center;
