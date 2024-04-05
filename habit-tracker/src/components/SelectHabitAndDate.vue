@@ -151,4 +151,10 @@ function attachHabitToSelectedDate() {
 .green-notification {
   color: aquamarine;
 }
+
+@media (width <=600px) {
+  .custom-select {
+    font-size: 13px;
+  }
+}
 </style>
