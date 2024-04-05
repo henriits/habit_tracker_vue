@@ -98,6 +98,8 @@ function attachHabitToSelectedDate() {
 
 .content-heading {
   margin-bottom: 5px;
+  color: #6c757d;
+  text-align: center;
 }
 
 .custom-input,
