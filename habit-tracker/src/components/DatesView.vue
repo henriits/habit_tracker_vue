@@ -88,12 +88,12 @@ const handleDateClick = (date) => {
   const formattedDate = formatDate(new Date(date));
   router.push({ name: "dateDetails", params: { date: formattedDate } });
 };
-
 const scrollToMiddle = () => {
-  const container = scrollContainer.value;
-  if (container) {
-    const middlePosition = container.scrollWidth / 2 - container.clientWidth / 2;
-    container.scrollLeft = middlePosition;
+  const dateDivContainer = scrollContainer.value.querySelector(".date-div-container");
+  if (dateDivContainer) {
+    const middlePosition =
+      dateDivContainer.scrollWidth / 2 - dateDivContainer.clientWidth / 2;
+    dateDivContainer.scrollLeft = middlePosition;
   }
 };
 
@@ -158,10 +158,11 @@ p {
 }
 
 .date-div-container {
-  display: inline-block;
-  flex-wrap: wrap;
-  width: max-content;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
   margin: 20px;
+  overflow-x: auto;
 }
 
 .date-div {
@@ -181,7 +182,6 @@ p {
   background-color: #f0f0f042;
 }
 
-.scroll-container,
 .date-container,
 .scroll-button-position {
   direction: ltr;
