@@ -1,4 +1,10 @@
 <template>
+  <div>
+    <label for="daysBeforeInput">Days Before:</label>
+    <input id="daysBeforeInput" type="number" v-model="numberOfDaysBefore" />
+    <label for="daysAfterInput">Days After:</label>
+    <input id="daysAfterInput" type="number" v-model="numberOfDaysAfter" />
+  </div>
   <div ref="scrollContainer" class="scroll-container" @scroll="handleScroll">
     <div class="date-div-container">
       <div
@@ -24,28 +30,27 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 
 const currentDate = new Date();
-const numberOfDaysBefore = 10;
-const numberOfDaysAfter = 10;
+const numberOfDaysBefore = ref(10);
+const numberOfDaysAfter = ref(10);
 const dates = ref([]);
-const checked = ref([]);
 const scrollContainer = ref(null);
 const scrollTimeout = ref(null);
 const selectedDate = ref(null);
 const today = new Date().toDateString(); // Calculate today's date once
 
 const generateDates = () => {
-  let i = -numberOfDaysBefore;
-  while (i <= numberOfDaysAfter) {
+  dates.value = [];
+  let i = -numberOfDaysBefore.value;
+  while (i <= numberOfDaysAfter.value) {
     const date = new Date();
     date.setDate(currentDate.getDate() + i);
     dates.value.push(date.toDateString());
-    checked.value.push(false);
     i += 1;
   }
 };
@@ -78,6 +83,11 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
+  generateDates();
+});
+
+// Watch for changes in numberOfDaysBefore and numberOfDaysAfter
+watch([numberOfDaysBefore, numberOfDaysAfter], () => {
   generateDates();
 });
 </script>
