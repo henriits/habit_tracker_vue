@@ -58,8 +58,22 @@ const addNewHabit = (habitName) => {
   saveHabitsToLocalStorage();
 };
 
+const removeHabitFromAllDates = (habitName) => {
+  const dateHabitMapping = JSON.parse(localStorage.getItem("DateHabitMapping"));
+  if (dateHabitMapping) {
+    Object.keys(dateHabitMapping).forEach((date) => {
+      dateHabitMapping[date] = dateHabitMapping[date].filter(
+        (habit) => habit.name !== habitName
+      );
+    });
+    localStorage.setItem("DateHabitMapping", JSON.stringify(dateHabitMapping));
+  }
+};
+
 const removeHabit = (index) => {
+  const habitToRemove = habits.value[index].name;
   habits.value.splice(index, 1);
+  removeHabitFromAllDates(habitToRemove); // Remove from all associated dates
   saveHabitsToLocalStorage();
 };
 
