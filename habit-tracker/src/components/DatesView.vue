@@ -1,10 +1,24 @@
 <template>
   <div>
-    <label for="daysBeforeInput">Days Before:</label>
-    <input id="daysBeforeInput" type="number" v-model="numberOfDaysBefore" />
-    <label for="daysAfterInput">Days After:</label>
-    <input id="daysAfterInput" type="number" v-model="numberOfDaysAfter" />
+    <label for="daysBeforeInput" class="input-label">Days Before:</label>
+    <input
+      id="daysBeforeInput"
+      type="number"
+      v-model="numberOfDaysBefore"
+      class="days-input"
+      min="0"
+    />
+    <label for="daysAfterInput" class="input-label">Days After:</label>
+    <input
+      id="daysAfterInput"
+      type="number"
+      v-model="numberOfDaysAfter"
+      class="days-input"
+      min="0"
+    />
   </div>
+  <p class="sentence">Please select the number of days before and after today.</p>
+
   <div ref="scrollContainer" class="scroll-container" @scroll="handleScroll">
     <div class="date-div-container">
       <div
@@ -93,6 +107,25 @@ watch([numberOfDaysBefore, numberOfDaysAfter], () => {
 </script>
 
 <style scoped>
+.input-label {
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.days-input {
+  width: 50px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-right: 20px;
+}
+
+.sentence {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
 .scroll-button-position {
   margin: 30px;
 }
