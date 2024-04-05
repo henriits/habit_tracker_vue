@@ -171,4 +171,23 @@ const saveEditedHabit = (index) => {
   border-radius: 4px;
   cursor: pointer;
 }
+
+@media (width <=600px) {
+  .habit-list-title {
+    font-size: 20px;
+  }
+
+  .habit-name,
+  .habit-edit-input {
+    font-size: 11px;
+  }
+
+  .habit-button,
+  .pause-button,
+  .remove-button {
+    font-size: 11px;
+    padding: 6px 8px;
+    margin-left: 3px;
+  }
+}
 </style>
