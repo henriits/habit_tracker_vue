@@ -6,8 +6,11 @@
         :key="index"
         @click="handleDateClick(date)"
         @keydown="index"
-        class="date-div"
-        :class="{ glow: isCurrentDate(date) }"
+        :class="{
+          'date-div': true,
+          'glow-selected': isSelectedDate(date),
+          today: date === today,
+        }"
       >
         <span>{{ date }}</span>
       </div>
@@ -15,7 +18,7 @@
   </div>
   <div class="scroll-button-position">
     <button class="custom-button" type="button" @click="scrollToMiddle">
-      Scroll to Today
+      Scroll to Selected Date
     </button>
   </div>
 </template>
@@ -33,6 +36,8 @@ const dates = ref([]);
 const checked = ref([]);
 const scrollContainer = ref(null);
 const scrollTimeout = ref(null);
+const selectedDate = ref(null);
+const today = new Date().toDateString(); // Calculate today's date once
 
 const generateDates = () => {
   let i = -numberOfDaysBefore;
@@ -45,14 +50,7 @@ const generateDates = () => {
   }
 };
 
-const isCurrentDate = (dateString) => {
-  const date = new Date(dateString);
-  return (
-    date.getDate() === currentDate.getDate() &&
-    date.getMonth() === currentDate.getMonth() &&
-    date.getFullYear() === currentDate.getFullYear()
-  );
-};
+const isSelectedDate = (dateString) => dateString === selectedDate.value;
 
 const formatDate = (date) => {
   const year = date.getFullYear();
@@ -62,9 +60,11 @@ const formatDate = (date) => {
 };
 
 const handleDateClick = (date) => {
+  selectedDate.value = date;
   const formattedDate = formatDate(new Date(date));
   router.push({ name: "dateDetails", params: { date: formattedDate } });
 };
+
 const scrollToMiddle = () => {
   const container = scrollContainer.value;
   if (container) {
@@ -117,8 +117,17 @@ onMounted(() => {
   height: 20%;
 }
 
-.glow {
+.glow-selected {
   animation: glow-animation 1s ease-in-out infinite alternate;
+}
+
+.today {
+  background-color: aquamarine;
+  color: #000;
+}
+
+.today:hover {
+  color: #fff;
 }
 
 @keyframes glow-animation {
