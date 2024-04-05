@@ -16,8 +16,14 @@
 
         <select v-model="selectedHabit" aria-label="select" class="custom-select">
           <option disabled value="">Please select a habit</option>
-          <option v-for="(habit, index) in habits" :key="index" :value="habit.name">
+          <option
+            v-for="(habit, index) in habits"
+            :key="index"
+            :value="habit.name"
+            :disabled="habit.paused"
+          >
             {{ habit.name }}
+            <span v-if="habit.paused">(disabled)</span>
           </option>
         </select>
 

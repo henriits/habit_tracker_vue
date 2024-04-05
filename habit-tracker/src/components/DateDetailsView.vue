@@ -86,6 +86,7 @@ const fetchHabitsForDate = () => {
     habits.value = dateHabitMapping[formattedDate.value].map((habit) => ({
       name: habit.name,
       completed: habit.completed || false,
+      paused: habit.paused || false,
     }));
 
     areAllHabitsCompleted.value = habits.value.every((habit) => habit.completed);
