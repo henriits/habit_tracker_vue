@@ -121,6 +121,7 @@ function attachHabitToSelectedDate() {
   font-size: 16px;
   cursor: pointer;
   margin: auto;
+  width: 100%;
 }
 
 .custom-button:hover {

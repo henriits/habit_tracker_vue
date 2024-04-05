@@ -8,6 +8,7 @@
         v-model="numberOfDaysBefore"
         class="days-input"
         min="0"
+        max="30"
       />
       <label for="daysAfterInput" class="input-label">Days After:</label>
       <input
@@ -16,6 +17,7 @@
         v-model="numberOfDaysAfter"
         class="days-input"
         min="0"
+        max="30"
       />
     </div>
     <p class="sentence">Please select the number of days before and after today.</p>
@@ -52,13 +54,13 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 
 const currentDate = new Date();
-const numberOfDaysBefore = ref(10);
-const numberOfDaysAfter = ref(10);
+const numberOfDaysBefore = ref(7);
+const numberOfDaysAfter = ref(7);
 const dates = ref([]);
 const scrollContainer = ref(null);
 const scrollTimeout = ref(null);
 const selectedDate = ref(null);
-const today = new Date().toDateString(); // Calculate today's date once
+const today = new Date().toDateString();
 
 const generateDates = () => {
   dates.value = [];
@@ -143,6 +145,7 @@ watch([numberOfDaysBefore, numberOfDaysAfter], () => {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  max-width: 100%;
 }
 
 .scroll-button:hover {
@@ -151,6 +154,7 @@ watch([numberOfDaysBefore, numberOfDaysAfter], () => {
 
 .date-div-container {
   display: inline-block;
+  flex-wrap: wrap;
   width: max-content;
   margin: 20px;
 }

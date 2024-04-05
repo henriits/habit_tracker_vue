@@ -85,6 +85,7 @@ const saveEditedHabit = (index) => {
   font-weight: bold;
   margin-bottom: 10px;
   padding: 20px;
+  text-align: center;
 }
 
 .habit-list {
