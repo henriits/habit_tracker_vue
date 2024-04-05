@@ -1,20 +1,32 @@
 <template>
   <div class="select-date-and-habit">
     <div class="main-content">
-      <h3 class="content-heading">Select a Date and a Habit!</h3>
-      <input type="date" v-model="selectedDate" aria-label="input" class="custom-input" />
-      <select v-model="selectedHabit" aria-label="select" class="custom-select">
-        <option disabled value="">Please select a habit</option>
-        <option v-for="(habit, index) in habits" :key="index" :value="habit.name">
-          {{ habit.name }}
-        </option>
-      </select>
+      <h3 class="content-heading">
+        {{
+          !habits.length ? "Please create habits first!" : "Select a Date and a Habit!"
+        }}
+      </h3>
+      <div v-if="habits.length">
+        <input
+          type="date"
+          v-model="selectedDate"
+          aria-label="input"
+          class="custom-input"
+        />
 
-      <br />
+        <select v-model="selectedHabit" aria-label="select" class="custom-select">
+          <option disabled value="">Please select a habit</option>
+          <option v-for="(habit, index) in habits" :key="index" :value="habit.name">
+            {{ habit.name }}
+          </option>
+        </select>
 
-      <button @click="attachHabitToSelectedDate" type="button" class="custom-button">
-        Attach Habit
-      </button>
+        <br />
+
+        <button @click="attachHabitToSelectedDate" type="button" class="custom-button">
+          Attach Habit
+        </button>
+      </div>
 
       <div v-if="showNotification" class="notification">
         This habit already exists for the selected date.

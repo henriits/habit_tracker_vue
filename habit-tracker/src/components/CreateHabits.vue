@@ -24,7 +24,7 @@
         </div>
       </li>
     </ol>
-    <div v-else class="no-habits-message">No custom habits created yet.</div>
+    <div v-else class="no-habits-message">There are no custom created habits yet.</div>
   </div>
 </template>
 
@@ -78,6 +78,8 @@ const saveEditedHabit = (index) => {
   max-width: 500px;
   margin: 0 auto;
   padding: 20px;
+  text-align: center;
+  color: #6c757d;
 }
 
 .habit-list-title {
