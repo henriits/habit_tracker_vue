@@ -15,11 +15,11 @@
           <button type="button" @click="toggleEdit(index)" class="habit-button">
             {{ habit.editing ? "Save" : "Edit" }}
           </button>
-          <button type="button" @click="removeHabit(index)" class="remove-button">
-            Remove
-          </button>
           <button type="button" @click="pauseHabit(index)" class="pause-button">
             {{ habit.paused ? "Unpause" : "Pause" }}
+          </button>
+          <button type="button" @click="removeHabit(index)" class="remove-button">
+            Remove
           </button>
         </div>
       </li>
@@ -58,8 +58,22 @@ const addNewHabit = (habitName) => {
   saveHabitsToLocalStorage();
 };
 
+const removeHabitFromAllDates = (habitName) => {
+  const dateHabitMapping = JSON.parse(localStorage.getItem("DateHabitMapping"));
+  if (dateHabitMapping) {
+    Object.keys(dateHabitMapping).forEach((date) => {
+      dateHabitMapping[date] = dateHabitMapping[date].filter(
+        (habit) => habit.name !== habitName
+      );
+    });
+    localStorage.setItem("DateHabitMapping", JSON.stringify(dateHabitMapping));
+  }
+};
+
 const removeHabit = (index) => {
+  const habitToRemove = habits.value[index].name;
   habits.value.splice(index, 1);
+  removeHabitFromAllDates(habitToRemove); // Remove from all associated dates
   saveHabitsToLocalStorage();
 };
 
@@ -145,5 +159,16 @@ const saveEditedHabit = (index) => {
 
 .remove-button:hover {
   background-color: #c82333;
+}
+
+.pause-button {
+  font-size: 16px;
+  padding: 8px 12px;
+  margin-left: 5px;
+  background-color: aquamarine;
+  color: #100d0d;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 </style>
