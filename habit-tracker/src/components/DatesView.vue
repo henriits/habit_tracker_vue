@@ -159,10 +159,8 @@ p {
 
 .date-div-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-wrap: nowrap;
-  width: 100%;
+  width: 90%;
   margin: 20px;
   overflow-x: auto;
 }
