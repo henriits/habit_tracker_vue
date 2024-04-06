@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { ref, defineEmits } from "vue";
+import { ref } from "vue";
 
 const habitName = ref("");
 const selectedEmoji = ref("");
