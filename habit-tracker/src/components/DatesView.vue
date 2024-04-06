@@ -160,7 +160,7 @@ p {
 .date-div-container {
   display: flex;
   flex-wrap: nowrap;
-  width: 100%;
+  width: 90%;
   margin: 20px;
   overflow-x: auto;
 }
