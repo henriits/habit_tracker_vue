@@ -21,72 +21,69 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      habitName: "",
-      selectedEmoji: "",
-      emojis: [
-        { label: "🏃 Running", value: "🏃" },
-        { label: "📚 Reading", value: "📚" },
-        { label: "🎨 Art", value: "🎨" },
-        { label: "💪 Exercise", value: "💪" },
-        { label: "🍎 Healthy Eating", value: "🍎" },
-        { label: "🧘 Meditation", value: "🧘" },
-        { label: "🎵 Music", value: "🎵" },
-        { label: "🛌 Sleep", value: "🛌" },
-        { label: "🧹 Cleaning", value: "🧹" },
-        { label: "🌱 Gardening", value: "🌱" },
-        { label: "🚭 Quit Smoking", value: "🚭" },
-        { label: "📝 Journalizing", value: "📝" },
-        { label: "🎲 Gaming", value: "🎲" },
-        { label: "🚶 Walking", value: "🚶" },
-        { label: "🚰 Drink Water", value: "🚰" },
-        { label: "🎬 Movie Night", value: "🎬" },
-        { label: "🍳 Cooking", value: "🍳" },
-        { label: "🍰 Baking", value: "🍰" },
-        { label: "🎭 Theater", value: "🎭" },
-        { label: "🎮 Video Games", value: "🎮" },
-        { label: "🧩 Puzzles", value: "🧩" },
-        { label: "📸 Photography", value: "📸" },
-        { label: "🖋️ Writing", value: "🖋️" },
-        { label: "✈️ Travel", value: "✈️" },
-        { label: "🏞️ Nature Walks", value: "🏞️" },
-        { label: "🚣‍♂️ Rowing", value: "🚣‍♂️" },
-        { label: "🚴 Cycling", value: "🚴" },
-        { label: "🎤 Karaoke", value: "🎤" },
-        { label: "🏹 Archery", value: "🏹" },
-        { label: "🏕️ Camping", value: "🏕️" },
-        { label: "🎡 Amusement Parks", value: "🎡" },
-        { label: "🛹 Skateboarding", value: "🛹" },
-        { label: "🎭 Improv Comedy", value: "🎭" },
-        { label: "🍷 Wine Tasting", value: "🍷" },
-        { label: "🛫 Paragliding", value: "🛫" },
-        { label: "🌋 Volcano Watching", value: "🌋" },
-        { label: "🏄 Surfing", value: "🏄" },
-        { label: "🚤 Sailing", value: "🚤" },
-        { label: "🏔️ Mountaineering", value: "🏔️" },
-        { label: "🎨 Pottery", value: "🎨" },
-        { label: "🎳 Bowling", value: "🎳" },
-        { label: "🎬 Film Making", value: "🎬" },
-        { label: "🚗 Road Trips", value: "🚗" },
-        { label: "🌊 Scuba Diving", value: "🌊" },
-        { label: "🎣 Fishing", value: "🎣" },
-        { label: "🚁 Helicopter Tours", value: "🚁" },
-        { label: "🌟 Other", value: "🌟" },
-      ],
-    };
-  },
-  methods: {
-    addHabit() {
-      if (this.habitName.trim() === "") return;
-      const habitWithEmoji = `${this.selectedEmoji} ${this.habitName}`;
-      this.$emit("add", habitWithEmoji);
-      this.habitName = "";
-      this.selectedEmoji = "";
-    },
-  },
+<script setup>
+import { ref, defineEmits } from "vue";
+
+const habitName = ref("");
+const selectedEmoji = ref("");
+const emojis = [
+  { label: "🏃 Running", value: "🏃" },
+  { label: "📚 Reading", value: "📚" },
+  { label: "🎨 Art", value: "🎨" },
+  { label: "💪 Exercise", value: "💪" },
+  { label: "🍎 Healthy Eating", value: "🍎" },
+  { label: "🧘 Meditation", value: "🧘" },
+  { label: "🎵 Music", value: "🎵" },
+  { label: "🛌 Sleep", value: "🛌" },
+  { label: "🧹 Cleaning", value: "🧹" },
+  { label: "🌱 Gardening", value: "🌱" },
+  { label: "🚭 Quit Smoking", value: "🚭" },
+  { label: "📝 Journalizing", value: "📝" },
+  { label: "🎲 Gaming", value: "🎲" },
+  { label: "🚶 Walking", value: "🚶" },
+  { label: "🚰 Drink Water", value: "🚰" },
+  { label: "🎬 Movie Night", value: "🎬" },
+  { label: "🍳 Cooking", value: "🍳" },
+  { label: "🍰 Baking", value: "🍰" },
+  { label: "🎭 Theater", value: "🎭" },
+  { label: "🎮 Video Games", value: "🎮" },
+  { label: "🧩 Puzzles", value: "🧩" },
+  { label: "📸 Photography", value: "📸" },
+  { label: "🖋️ Writing", value: "🖋️" },
+  { label: "✈️ Travel", value: "✈️" },
+  { label: "🏞️ Nature Walks", value: "🏞️" },
+  { label: "🚣‍♂️ Rowing", value: "🚣‍♂️" },
+  { label: "🚴 Cycling", value: "🚴" },
+  { label: "🎤 Karaoke", value: "🎤" },
+  { label: "🏹 Archery", value: "🏹" },
+  { label: "🏕️ Camping", value: "🏕️" },
+  { label: "🎡 Amusement Parks", value: "🎡" },
+  { label: "🛹 Skateboarding", value: "🛹" },
+  { label: "🎭 Improv Comedy", value: "🎭" },
+  { label: "🍷 Wine Tasting", value: "🍷" },
+  { label: "🛫 Paragliding", value: "🛫" },
+  { label: "🌋 Volcano Watching", value: "🌋" },
+  { label: "🏄 Surfing", value: "🏄" },
+  { label: "🚤 Sailing", value: "🚤" },
+  { label: "🏔️ Mountaineering", value: "🏔️" },
+  { label: "🎨 Pottery", value: "🎨" },
+  { label: "🎳 Bowling", value: "🎳" },
+  { label: "🎬 Film Making", value: "🎬" },
+  { label: "🚗 Road Trips", value: "🚗" },
+  { label: "🌊 Scuba Diving", value: "🌊" },
+  { label: "🎣 Fishing", value: "🎣" },
+  { label: "🚁 Helicopter Tours", value: "🚁" },
+  { label: "🌟 Other", value: "🌟" },
+];
+
+const emit = defineEmits(["add"]);
+
+const addHabit = () => {
+  if (habitName.value.trim() === "") return;
+  const habitWithEmoji = `${selectedEmoji.value} ${habitName.value}`;
+  emit("add", habitWithEmoji);
+  habitName.value = "";
+  selectedEmoji.value = "";
 };
 </script>
 
